@@ -1,0 +1,76 @@
+% \documentclass[openacc]{rsproca_new}
+\documentclass[a4paper]{article}
+% \titlehead{Research}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\numberwithin{equation}{section}
+\usepackage[backend=bibtex, style=numeric-comp, sorting=none]{biblatex}
+\DeclareFieldFormat{labelnumberwidth}{[#1] }
+\addbibresource{main.bib}
+
+\begin{document}
+
+\title{Statistical mechanics of Hamiltonian curl-force systems}
+
+\author{%%%% Author details
+Omer Chor$^{1}$, Alja\v{z} Godec$^{2}$ and Oren Raz$^{1}$}
+
+%%%%%%%%% Insert author address here
+\date{
+$^{1}$Department of Physics of Complex Systems, Weizmann Institute of Science, Rehovot, 76100, Israel
+\\
+$^{2}$ \textcolor{red}{Add Alja\v{z}'s affiliation}\\[2ex]
+\today}
+
+\maketitle
+
+%%%% Subject entries to be placed here %%%%
+% \subject{xxxxx, xxxxx, xxxx}
+
+%%%% Keyword entries to be placed here %%%%
+% \keywords{xxxx, xxxx, xxxx}
+
+%%%% Insert corresponding author and its email address}
+% \corres{Insert corresponding author name\\
+% \email{xxx@xxxx.xx.xx}}
+
+% \date{\today}
+
+\begin{abstract}
+We investigate the statistical mechanics of a particle subject to curl-forces---reversible, velocity independent non-conservative forces with non-vanishing curl---that can be described by a Hamiltonian with an anisotropic kinetic energy term. We show that generally they do not relax to the corresponding Boltzmann distribution when coupled to a heat bath, and therefore the Hamiltonian structure cannot be used to easily find their nonequilibrium steady state. By applying a canonical transformation, the system can be mapped to a system without curl-forces that is instead coupled to multiple heat baths at different temperatures. For quadratic potentials, this mapping recovers the underdamped Brownian gyrator, providing a new perspective on the origin of its rotational currents as the result of deterministic, non-conservative forces. The same analysis is also applied to another variation of the Brownian gyrator, demonstrating its generality.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+\label{sec:Intro}
+\input{Sec_Introduction}
+
+\section{Hamiltonian curl-forces}
+
+\label{sec:HCF}
+\input{Sec_CurlForce}
+
+\section{Statistical mechanics}
+\label{sec:StochDyn}
+\input{Sec_StochasticDynamics}
+
+\section{Applications}
+\label{Sec:Applications}
+\input{Sec_Applications}
+\input{Sec_discussion}
+
+ \paragraph{Acknowledgments}
+\textcolor{red}{Add Alja\v{z}'s funding and Omer's (if any should be listed)}
+OR acknowledges financial support from the ISF, grant no. 232/23,  by the Minerva foundation with funding from the Federal German Ministry for Education and Research and by the Lower Saxony - Israel collaboration grant. We would like to thank Roi Holtzman and Shahaf Aharony Shapira for helpful discussions.
+ 
+% \bibliographystyle{RS}
+% \bibliography{main}
+\printbibliography
+
+\end{document}

@@ -151,7 +151,7 @@
         }
 
         .scaffold-cell::before {
-            content: "NODE // [0" attr(data-index) "]";
+            content: "[0" attr(data-index) "]";
             position: absolute;
             top: -16px;
             left: 30px;
@@ -204,11 +204,17 @@
             box-shadow: 12px 12px 0px var(--ink-black);
             position: relative;
             z-index: 5;
+            font-size: clamp(1.2rem, 1.4vw, 1.7rem);
         }
         
-        .equation-slab-feature.slab-cyan { background-color: rgba(0, 216, 255, 0.12); border-color: var(--pop-cyan); }
-        .equation-slab-feature.slab-magenta { background-color: rgba(255, 51, 119, 0.12); border-color: var(--pop-pink); }
-        .equation-slab-feature.slab-amber { background-color: rgba(255, 204, 0, 0.12); border-color: var(--pop-yellow); }
+        .equation-slab-feature.slab-cyan    { background-color: rgba(0, 216, 255, 0.12); background-image: radial-gradient(rgba(0, 216, 255, 0.25) 15%, transparent 15%); background-size: 20px 20px; border-color: var(--pop-cyan); }
+        .equation-slab-feature.slab-magenta { background-color: rgba(255, 51, 119, 0.12); background-image: radial-gradient(rgba(255, 51, 119, 0.25) 15%, transparent 15%); background-size: 20px 20px; border-color: var(--pop-pink); }
+        .equation-slab-feature.slab-amber   { background-color: rgba(255, 204, 0, 0.12); background-image: radial-gradient(rgba(255, 204, 0, 0.35) 15%, transparent 15%); background-size: 20px 20px; border-color: var(--pop-yellow); }
+
+        /* Nested slabs: opaque base so the parent cell's dot pattern doesn't bleed through */
+        .scaffold-cell .equation-slab-feature.slab-cyan    { background-color: #d6f7ff; }
+        .scaffold-cell .equation-slab-feature.slab-magenta { background-color: #ffe0ec; }
+        .scaffold-cell .equation-slab-feature.slab-amber   { background-color: #fff5cc; }
 
         .equation-slab-feature .MathJax {
             font-size: clamp(1.2rem, 1.8vw, 2.4rem) !important;
