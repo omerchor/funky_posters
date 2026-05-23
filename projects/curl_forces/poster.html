@@ -203,9 +203,13 @@
         .scaffold-cell .equation-slab-feature.slab-amber   { background-color: #fff5cc; }
 
         .equation-slab-feature .MathJax {
-            font-size: clamp(1rem, 1.5vw, 2rem) !important;
+            font-size: clamp(1.3rem, 1.9vw, 2.5rem) !important;
             width: 100% !important;
             text-align: center !important;
+        }
+
+        .eq-box .MathJax {
+            font-size: clamp(1.2rem, 1.6vw, 2rem) !important;
         }
 
         /* inner inline equation box */
@@ -398,13 +402,14 @@
     <header id="poster-header">
         <h1>Statistical Mechanics of Hamiltonian Curl-Force Systems</h1>
         <div class="meta-mesh">
-            <span class="star-node">Omer Chor</span>
-            <span>Aljaž Godec</span>
-            <span>Oren Raz</span>
+            <span class="star-node">Omer Chor <sup>1</sup></span>
+            <span>Aljaž Godec <sup>2</sup></span>
+            <span>Oren Raz <sup>1</sup></span>
         </div>
         <div class="affiliation-panel" id="poster-affiliation">
-            Department of Physics of Complex Systems, Weizmann Institute of Science, Rehovot, Israel
-        </div>
+            <div><sup>1</sup> Department of Physics of Complex Systems, Weizmann Institute of Science, Rehovot, Israel</div>
+            <div><sup>2</sup> University of Freiburg, Germany</div>
+         </div>
     </header>
 
     <!-- ROW 1: two intro panels side by side -->
@@ -437,16 +442,17 @@
         <div class="scaffold-cell pink-mesh">
             <h2>Hamiltonian Curl-Forces</h2>
             <p>
-                The unique Hamiltonian yielding a <em>velocity-independent</em> force [1] is:
+                The unique Hamiltonian yielding a <em>velocity-independent non-conservative</em> force [1] is:
             </p>
             <div class="eq-box">
                 $$H(\mathbf{p},\mathbf{x}) = \frac{1}{2m}\mathbf{p}^T \mathcal{A}\, \mathbf{p} + U(\mathbf{x})$$
             </div>
             <p>
-                where $\mathcal{A}=\mathrm{diag}(\alpha,\gamma)$ is a symmetric, position-independent matrix.
-                The resulting force is
-                $\mathbf{F} = -\mathcal{A}\nabla U$,
-                with curl
+                where $\mathcal{A}$ is a symmetric, position-independent matrix. 
+            </p>
+            <p>
+                In 2D, WLOG $\mathcal{A}=\mathrm{diag}(\alpha,\gamma)$.
+                The resulting force is $\mathbf{F} = -\mathcal{A}\nabla U$, with curl
             </p>
             <div class="eq-box">
                 $$\nabla\times\mathbf{F} = (\alpha-\gamma)\,\partial_{x_1}\partial_{x_2}U$$
