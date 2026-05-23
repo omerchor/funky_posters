@@ -531,6 +531,13 @@
                     $$\langle\dot{S}\rangle = \frac{k_B\xi u^2(T_Y-T_X)^2}{2T_XT_Y(\xi^2 k+u^2 m)}$$
                 </li>
             </ul>
+
+        <!-- EQUATION SLAB: EPR invariance -->
+        <div class="equation-slab-feature slab-amber" style="position:relative; margin-top:3vw;">
+            <span class="slab-label">EPR INVARIANCE</span>
+            $$\langle\dot{S}\rangle_{\text{curl-force}} \;=\; \langle\dot{S}\rangle_{\text{gyrator}}
+            $$
+        </div>
         </div>
 
         <!-- PANEL 6: Application 2 — Ring gyrator -->
@@ -546,19 +553,21 @@
                 $$(\nabla\times\mathbf{F})\cdot\hat{z}
                   = \frac{R_0 k\sqrt{T}(T_Y-T_X)\,xy}{(T_Xx^2+T_Yy^2)^{3/2}}$$
             </div>
-            <div class="callout">
+            <img
+                src="velocity_field.svg"
+                alt="Force field and curl of the ring gyrator dual system (left) and Langevin simulation currents (right)"
+                style="width:100%; margin-top:2vw; display:block; background:#fff;">
+            <p style="font-size:clamp(0.8rem,0.9vw,1rem); font-style:italic; margin-top:0.6vw; margin-bottom:0; text-align:center;">
+                (a) Force field $\mathbf{F}$ and curl $\nabla\times\mathbf{F}$ (color) for the dual curl-force system.
+                (b) Steady-state probability density and currents from 25,000 Langevin trajectories.
+            </p>
+            <div class="equation-slab-feature slab-cyan" style="margin-top:2vw;">
+                <span class="slab-label">SIGN OF CURL → DIRECTION OF GYRATION</span>
                 Four alternating circulation regions — matching Langevin simulations
-                and prior results for the ring gyrator, without solving the
+                and prior results for the ring gyrator [3], without solving the
                 Fokker–Planck equation.
             </div>
         </div>
-    </div>
-
-    <!-- EQUATION SLAB: EPR invariance -->
-    <div class="equation-slab-feature slab-amber" style="position:relative;">
-        <span class="slab-label">EPR INVARIANCE</span>
-        $$\langle\dot{S}\rangle_{\text{curl-force}} \;=\; \langle\dot{S}\rangle_{\text{gyrator}}
-        \qquad\text{(invariant under linear coordinate transformation)}$$
     </div>
 
     <!-- PANEL 7: Key takeaways — full width -->
