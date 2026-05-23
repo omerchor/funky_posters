@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DYNAMIC PHASE-SPACE STACK TEMPLATE</title>
+    
+    <!-- Ultra-Robust MathJax Configuration for Print & Dynamic Compilations -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <style>
+        /* --- NEO-BRUTALIST ARCHIVAL POP ART PALETTE WITH SERIOUS JOURNAL TYPOGRAPHY --- */
+        :root {
+            --ink-black: #000000;           
+            --paper-cream: #faf7f0;         
+            --pop-pink: #ff3377;            
+            --pop-cyan: #00d8ff;            
+            --pop-yellow: #ffcc00;          
+            
+            --thick-border: 6px solid var(--ink-black);
+            --block-shadow-large: 20px 20px 0px var(--ink-black);
+            --block-shadow-small: 8px 8px 0px var(--ink-black);
+            --halftone-grid: radial-gradient(var(--ink-black) 12%, transparent 12%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, 'Nimbus Roman No9 L', 'FreeSerif', serif;
+            background-color: #ebdcb9;
+            background-image: var(--halftone-grid);
+            background-size: 30px 30px;
+            color: var(--ink-black);
+            padding: 4vw;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- FLEXIBLE POSTER CANVAS CONTAINER --- */
+        .poster-canvas {
+            width: 100%;
+            max-width: 1600px;
+            background: var(--paper-cream);
+            border: var(--thick-border);
+            padding: 5vw;
+            box-shadow: var(--block-shadow-large);
+            display: flex;
+            flex-direction: column;
+            gap: 3.5vw;
+            position: relative;
+        }
+
+        /* --- COMPACT STATIC HEADER SLAB --- */
+        header {
+            display: block;
+            text-align: center;
+            border: var(--thick-border);
+            background: var(--pop-yellow);
+            padding: 2.5vw;
+            box-shadow: var(--block-shadow-small);
+        }
+
+        header h1 {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: clamp(2.2rem, 3.8vw, 5rem);
+            text-transform: uppercase;
+            letter-spacing: -1.5px;
+            line-height: 0.95;
+            color: var(--ink-black);
+            text-shadow: 4px 4px 0px #ffffff;
+            margin-bottom: 1.5vw;
+        }
+
+        .meta-mesh {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 1.2vw;
+        }
+
+        .meta-mesh span {
+            background: var(--paper-cream);
+            border: var(--thick-border);
+            padding: 5px 16px;
+            box-shadow: 4px 4px 0px var(--ink-black);
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        .meta-mesh .star-node {
+            background: var(--pop-pink) !important;
+            color: #ffffff !important;
+        }
+
+        /* --- SUBTLE, SMALLER AFFILIATION PANEL --- */
+        .affiliation-panel {
+            display: inline-block;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.05rem;
+            font-weight: bold;
+            font-style: italic;
+            color: var(--ink-black);
+            background: var(--paper-cream);
+            border: 3px solid var(--ink-black);
+            padding: 4px 12px;
+            box-shadow: 4px 4px 0px var(--ink-black);
+            margin: 0 auto;
+        }
+
+        /* --- DYNAMIC AUTOMATIC FLOW STACK --- */
+        .dynamic-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 4vw;
+            width: 100%;
+        }
+
+        /* --- CONTAINER CELL OBJECTS --- */
+        .scaffold-cell {
+            background: #ffffff;
+            border: var(--thick-border);
+            padding: 3vw;
+            position: relative;
+            box-shadow: var(--block-shadow-large);
+            transition: all 0.2s ease;
+        }
+
+        .scaffold-cell::before {
+            content: "NODE // [0" attr(data-index) "]";
+            position: absolute;
+            top: -16px;
+            left: 30px;
+            background: var(--ink-black);
+            color: #ffffff;
+            font-family: monospace;
+            font-size: 0.85rem;
+            padding: 2px 14px;
+            letter-spacing: 1.5px;
+            font-weight: bold;
+        }
+
+        .scaffold-cell.pink-mesh { background-image: radial-gradient(rgba(255, 51, 119, 0.08) 15%, transparent 15%); background-size: 20px 20px; }
+        .scaffold-cell.cyan-mesh { background-image: radial-gradient(rgba(0, 216, 255, 0.08) 15%, transparent 15%); background-size: 20px 20px; }
+        .scaffold-cell.amber-mesh { background-image: radial-gradient(rgba(255, 204, 0, 0.08) 15%, transparent 15%); background-size: 20px 20px; }
+        .scaffold-cell.solid-yellow { background-color: var(--pop-yellow); }
+
+        h2 {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: clamp(1.4rem, 1.8vw, 2.5rem);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2vw;
+            color: var(--ink-black);
+            border-bottom: var(--thick-border);
+            padding-bottom: 0.5vw;
+        }
+
+        p, li {
+            font-size: clamp(1.15rem, 1.3vw, 1.5rem);
+            font-weight: normal; 
+            color: var(--ink-black);
+            line-height: 1.6;
+            margin-bottom: 1.5vw;
+            text-align: justify;
+        }
+
+        /* --- EMBEDDED ATTENTION-GRABBING EYE SLABS --- */
+        .equation-slab-feature {
+            background: var(--paper-cream);
+            border: var(--thick-border);
+            padding: 2.5vw 4vw;
+            margin: 1vw 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            overflow: visible; 
+            white-space: normal;
+            box-shadow: 12px 12px 0px var(--ink-black);
+            position: relative;
+            z-index: 5;
+        }
+        
+        .equation-slab-feature.slab-cyan { background-color: rgba(0, 216, 255, 0.12); border-color: var(--pop-cyan); }
+        .equation-slab-feature.slab-magenta { background-color: rgba(255, 51, 119, 0.12); border-color: var(--pop-pink); }
+        .equation-slab-feature.slab-amber { background-color: rgba(255, 204, 0, 0.12); border-color: var(--pop-yellow); }
+
+        .equation-slab-feature .MathJax {
+            font-size: clamp(1.2rem, 1.8vw, 2.4rem) !important;
+            width: 100% !important;
+            text-align: center !important;
+        }
+
+        /* --- FOOTER OUTLET --- */
+        footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            border: var(--thick-border);
+            background: #ffffff;
+            padding: 2.5vw;
+            font-family: monospace;
+            font-size: 1.1rem;
+            font-weight: 900;
+            width: 100%;
+            box-shadow: var(--block-shadow-small);
+        }
+
+        @media print {
+            box-sizing: border-box;
+            body { padding: 0; background: #fff; }
+            .poster-canvas { border: 6px solid #000; box-shadow: none; padding: 1cm; }
+            .scaffold-cell, .equation-slab-feature, header, footer { transform: none !important; box-shadow: none !important; }
+        }
+    </style>
+</head>
+<body class="tex2jax_process">
+
+<div class="poster-canvas">
+    
+    <!-- STATIC HEADER BAR -->
+    <header id="poster-header">
+        <h1>Dynamic Template Title Block: Add Your Presentation Heading</h1>
+        <div class="meta-mesh">
+            <span class="star-node">Primary Presenter Name</span>
+            <span>Co-Author Alpha</span>
+            <span>Co-Author Beta</span>
+        </div>
+        <!-- Compact, clean affiliation field nested right after names -->
+        <div class="affiliation-panel" id="poster-affiliation">
+            Department of Complex Systems, Faculty of Physics, Weizmann Institute of Science[cite: 1]
+        </div>
+    </header>
+
+    <!-- THE DYNAMIC STACK -->
+    <div class="dynamic-stack" id="interactive-stack">
+        
+        <!-- SAMPLE PANEL 1 -->
+        <div class="scaffold-cell cyan-mesh">
+            <h2>[01] Foundational Dynamic Block</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat[cite: 1].</p>
+        </div>
+
+        <!-- BREAKAWAY SLAB FEATURE -->
+        <div class="equation-slab-feature slab-cyan">
+            $$\oint_{\partial \Sigma} \mathbf{E} \cdot d\mathbf{\ell} = -\frac{\partial}{\partial t} \iint_{\Sigma} \mathbf{B} \cdot d\mathbf{S}$$
+        </div>
+
+        <!-- SAMPLE PANEL 2 -->
+        <div class="scaffold-cell pink-mesh">
+            <h2>[02] Secondary Stack Node</h2>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            
+            <p>Mathematical integrations compile accurately directly inside the nested structure framework parameters:</p>
+            <div style="background: #faf7f0; padding: 1.5vw; border: 3px solid #000; margin: 1vw 0;">
+                $$\psi(x, t) = \frac{1}{\sqrt{2\pi\hbar}} \int_{-\infty}^{\infty} \phi(p) e^{i(px - Et)/\hbar} dp$$
+            </div>
+        </div>
+
+        <!-- BREAKAWAY SLAB FEATURE 2 -->
+        <div class="equation-slab-feature slab-magenta">
+            $$\hat{H}\Psi(\mathbf{r}, t) = i\hbar \frac{\partial}{\partial t}\Psi(\mathbf{r}, t)$$
+        </div>
+
+        <!-- SAMPLE PANEL 3 -->
+        <div class="scaffold-cell amber-mesh">
+            <h2>[03] Tertiary Anisotropic Unit</h2>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        </div>
+
+        <!-- SAMPLE PANEL 4 -->
+        <div class="scaffold-cell solid-yellow">
+            <h2>[04] Solid Grounded Target Block</h2>
+            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
+        </div>
+
+    </div>
+
+    <!-- STATIC FOOTER BAR -->
+    <footer id="poster-footer">
+        <div><span style="color:var(--pop-pink);">REFERENCE SYSTEM DECODER:</span> Your Custom Citation Matrix Reference, (2026). // Ref: Hamiltonian_curl_forces___presentation_2026.pdf</div>
+        <div>Correspondence Interface: <span style="background:var(--pop-yellow); padding:3px 10px; border:3px solid #000; font-weight:bold; font-family:monospace;">user@domain.edu</span></div>
+    </footer>
+    
+</div>
+
+<!-- CRAZY INTERLOCKING AUTOCALCULATING ENGINE SCRIPT -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const stack = document.getElementById("interactive-stack");
+        const items = stack.children;
+        let indexCounter = 1;
+
+        for (let i = 0; i < items.length; i++) {
+            let el = items[i];
+
+            if (el.classList.contains('scaffold-cell')) {
+                el.setAttribute('data-panel', indexCounter);
+                el.setAttribute('data-index', indexCounter);
+                indexCounter++;
+            }
+
+            let tiltMagnitude = (i % 2 === 0) ? -0.6 : 0.5;
+            let offsetY = (i % 3 === 0) ? 8 : (i % 3 === 1) ? -6 : 4;
+            let skewX = (i % 4 === 0) ? -0.8 : (i % 4 === 2) ? 0.6 : 0;
+
+            if (el.classList.contains('scaffold-cell')) {
+                el.style.transform = `skewX(${skewX}deg) rotate(${tiltMagnitude}deg) translateY(${offsetY}px)`;
+            } else if (el.classList.contains('equation-slab-feature')) {
+                el.style.transform = `rotate(${-tiltMagnitude * 1.2}deg) scale(1.02)`;
+            }
+        }
+        
+        document.getElementById("poster-header").style.transform = "rotate(-0.4deg)";
+        document.getElementById("poster-affiliation").style.transform = "rotate(0.2deg)";
+        document.getElementById("poster-footer").style.transform = "rotate(0.3deg)";
+    });
+</script>
+
+</body>
+</html>
