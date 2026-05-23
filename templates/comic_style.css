@@ -56,7 +56,7 @@ header {
 
 header h1 {
     font-family: 'Impact', 'Arial Black', sans-serif;
-    font-size: clamp(2.2rem, 3.8vw, 5rem);
+    font-size: clamp(2.6rem, 4.4vw, 6rem);
     text-transform: uppercase;
     letter-spacing: -1.5px;
     line-height: 0.95;
@@ -71,7 +71,7 @@ header h1 {
     justify-content: center;
     gap: 15px;
     font-family: 'Times New Roman', serif;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-style: italic;
     margin-bottom: 1.2vw;
 }
@@ -93,7 +93,7 @@ header h1 {
 .affiliation-panel {
     display: inline-block;
     font-family: 'Times New Roman', serif;
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     font-weight: bold;
     font-style: italic;
     color: var(--ink-black);
@@ -141,7 +141,7 @@ header h1 {
 
 h2 {
     font-family: 'Impact', 'Arial Black', sans-serif;
-    font-size: clamp(1.4rem, 1.8vw, 2.5rem);
+    font-size: clamp(1.6rem, 2.1vw, 3rem);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 2vw;
@@ -151,7 +151,7 @@ h2 {
 }
 
 p, li {
-    font-size: clamp(1.15rem, 1.3vw, 1.5rem);
+    font-size: clamp(1.35rem, 1.55vw, 1.8rem);
     font-weight: normal;
     color: var(--ink-black);
     line-height: 1.6;
@@ -173,7 +173,7 @@ p, li {
     box-shadow: 12px 12px 0px var(--ink-black);
     position: relative;
     z-index: 5;
-    font-size: clamp(1.2rem, 1.4vw, 1.7rem);
+    font-size: clamp(1.4rem, 1.65vw, 2rem);
 }
 
 .equation-slab-feature.slab-cyan    { background-color: rgba(0,216,255,0.12); background-image: radial-gradient(rgba(0,216,255,0.25) 15%, transparent 15%); background-size: 20px 20px; border-color: var(--pop-cyan); }
@@ -186,7 +186,7 @@ p, li {
 .scaffold-cell .equation-slab-feature.slab-amber   { background-color: #fff5cc; }
 
 .equation-slab-feature .MathJax {
-    font-size: clamp(1.2rem, 1.8vw, 2.4rem) !important;
+    font-size: clamp(1.4rem, 2.1vw, 2.8rem) !important;
     width: 100% !important;
     text-align: center !important;
 }
@@ -201,7 +201,7 @@ footer {
     background: #ffffff;
     padding: 2.5vw;
     font-family: monospace;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: 900;
     width: 100%;
     box-shadow: var(--block-shadow-small);
@@ -225,7 +225,7 @@ footer {
     text-align: center;
 }
 
-.eq-box .MathJax { font-size: clamp(1.2rem, 1.6vw, 2rem) !important; }
+.eq-box .MathJax { font-size: clamp(1.4rem, 1.9vw, 2.4rem) !important; }
 
 /* --- TAG LABELS ON SLABS --- */
 .slab-label {
@@ -249,7 +249,7 @@ footer {
     margin: 1vw 0;
     box-shadow: 6px 6px 0 var(--ink-black);
     font-weight: bold;
-    font-size: clamp(1.15rem, 1.3vw, 1.55rem);
+    font-size: clamp(1.35rem, 1.55vw, 1.85rem);
 }
 
 .callout.pink-call   { background: rgba(255,51,119,0.2); }
@@ -322,9 +322,9 @@ ol[style*="counter-reset:refs"] li::before { content: "[" counter(refs) "]"; pos
     .dynamic-stack { gap: 0.6cm; }
     .two-col { gap: 0.5cm; }
 
-    h1 { font-size: 3.5rem; }
-    h2 { font-size: 1.8rem; margin-bottom: 0.4cm; }
-    p, li { font-size: 1.1rem; margin-bottom: 0.3cm; }
+    h1 { font-size: 4rem; }
+    h2 { font-size: 2.1rem; margin-bottom: 0.4cm; }
+    p, li { font-size: 1.3rem; margin-bottom: 0.3cm; }
 
     /* Pull the node label back into flow so it doesn't overlap */
     .scaffold-cell::before {
