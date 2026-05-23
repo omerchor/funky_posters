@@ -192,9 +192,14 @@
             z-index: 5;
         }
 
-        .equation-slab-feature.slab-cyan    { background-color: rgba(0,216,255,0.12); border-color: var(--pop-cyan); }
-        .equation-slab-feature.slab-magenta { background-color: rgba(255,51,119,0.12); border-color: var(--pop-pink); }
-        .equation-slab-feature.slab-amber   { background-color: rgba(255,204,0,0.20);  border-color: var(--pop-yellow); }
+        .equation-slab-feature.slab-cyan    { background-color: rgba(0,216,255,0.12); background-image: radial-gradient(rgba(0,216,255,0.25) 15%, transparent 15%); background-size: 20px 20px; border-color: var(--pop-cyan); }
+        .equation-slab-feature.slab-magenta { background-color: rgba(255,51,119,0.12); background-image: radial-gradient(rgba(255,51,119,0.25) 15%, transparent 15%); background-size: 20px 20px; border-color: var(--pop-pink); }
+        .equation-slab-feature.slab-amber   { background-color: rgba(255,204,0,0.20);  background-image: radial-gradient(rgba(255,204,0,0.35) 15%, transparent 15%); background-size: 20px 20px; border-color: var(--pop-yellow); }
+
+        /* Nested slabs: opaque base so the parent cell's dot pattern doesn't bleed through */
+        .scaffold-cell .equation-slab-feature.slab-cyan    { background-color: #d6f7ff; }
+        .scaffold-cell .equation-slab-feature.slab-magenta { background-color: #ffe0ec; }
+        .scaffold-cell .equation-slab-feature.slab-amber   { background-color: #fff5cc; }
 
         .equation-slab-feature .MathJax {
             font-size: clamp(1rem, 1.5vw, 2rem) !important;
@@ -501,7 +506,7 @@
     </div>
 
     <!-- EQUATION SLAB: the mapping -->
-    <div class="equation-slab-feature slab-magenta" style="position:relative;">
+    <div class="equation-slab-feature slab-magenta magenta-mesh" style="position:relative;">
         <span class="slab-label">THE DUALITY</span>
         $$\underbrace{\text{single bath } T,\ \mathcal{A}\neq\mathbf{1},\
           \mathbf{F}=-\mathcal{A}\nabla U}_{\text{Hamiltonian curl-force system}}
@@ -515,10 +520,10 @@
 
         <!-- PANEL 5: Application 1 — Brownian gyrator -->
         <div class="scaffold-cell pink-mesh">
-            <h2>Application: Brownian Gyrator [2]</h2>
+            <h2>Application: Brownian Gyrator</h2>
             <p>
                 Harmonic potential $\tilde{U}(X,Y)=\frac{1}{2}(kX^2+2uXY+kY^2)$ with
-                baths $T_X\neq T_Y$.  Applying the inverse transformation gives a
+                baths $T_X\neq T_Y$ [2].  Applying the inverse transformation gives a
                 curl-force system with constant curl:
             </p>
             <div class="eq-box">
@@ -541,11 +546,11 @@
         </div>
 
         <!-- PANEL 6: Application 2 — Ring gyrator -->
-        <div class="scaffold-cell amber-mesh">
-            <h2>Application: Gyrator on a Ring [3]</h2>
+        <div class="scaffold-cell cyan-mesh">
+            <h2>Application: Gyrator on a Ring</h2>
             <p>
                 Confining potential $\tilde{U}(R)=\frac{1}{2}k(R-R_0)^2$ with two
-                orthogonal baths.  The dual curl-force field is radial:
+                orthogonal baths [3].  The dual curl-force field is radial:
                 $$\mathbf{F}(\mathbf{x}) = -k\!\left(1 - \frac{\sqrt{T}\,R_0}{\sqrt{T_Xx^2+T_Yy^2}}\right)\mathbf{x}$$
             </p>
             <p>The curl has a <strong>quadrupolar</strong> structure:</p>
