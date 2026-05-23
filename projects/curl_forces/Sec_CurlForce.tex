@@ -1,0 +1,41 @@
+In this section we give a short reminder on Hamiltonian curl-forces, following Berry and Shukla \cite{berry2015hamiltonian}. For simplicity, we first discuss systems with two DoF, and then extend to systems with more DoF.
+
+The standard Hamiltonian of a classical system (without a magnetic field) is of the form 
+\begin{equation}\label{eq:Classical_Hamiltonian}
+    H(\mathbf p,\mathbf x) = \frac{\mathbf{p}^2}{2m} + U(\mathbf x)
+\end{equation}
+where $\mathbf p=(p_{1},p_{2})$ is the canonical momentum conjugate to the cartesian coordinates $\mathbf x = (x_1,x_2)$\footnote{In principle, one can use any set of canonical coordinates and momenta, not necessarily cartesian coordinates. However, in the non cartesian case it is less trivial to identify whether the force field is velocity independent. Therefore, we assume here cartesian coordinates for simplicity.}, and $m$ is the particle's mass. The equations of motion of the system are
+\begin{eqnarray} \label{eq:EqOfMotion}
+    \dot x_i = \frac{\partial H}{\partial p_i} = \frac{p_i}{m} \qquad 
+    \dot p_i=-\frac{\partial H}{\partial x_i} = -\frac{\partial U(\mathbf x)}{\partial x_i} 
+\end{eqnarray}
+The force is defined as 
+\begin{equation} \label{eq:NewtonForce}
+    \mathbf F \equiv m\ddot{\mathbf x} = -\nabla U(\mathbf x),
+\end{equation}
+which is necessarily conservative, as it is a gradient of the potential. 
+
+One can, in principle, consider Hamiltonians that are not of the form Eq.~\ref{eq:Classical_Hamiltonian}. The force in this case is still defined as $\mathbf F = m \ddot{\mathbf x}$, but the force field $\mathbf F$ might be velocity dependent, and not only a function of position. Berry and Shukla showed \cite{berry2015hamiltonian} that  under mild assumptions, the only Hamiltonian structure that leads to a velocity independent force field, is 
+\begin{eqnarray} \label{eq:CurlHamiltonians}
+    H(\mathbf p,\mathbf x) = \frac{1}{2m}\mathbf p^T \mathcal{A} \mathbf p + U(\mathbf x),
+\end{eqnarray}
+where $\mathcal{A}$ is a symmetric, position independent matrix. In this case,
+\begin{equation}
+\mathbf F \equiv m\ddot{\mathbf{x}} = -\mathcal{A}\nabla U(\mathbf x).
+\label{eq:HCF-def}
+\end{equation}
+Without loss of generality, let us work in the (cartesian) basis where $\mathcal{A}$ is diagonal, 
+\begin{eqnarray}
+    \mathcal{A} = \begin{pmatrix}
+         \alpha & 0 \\
+         0 & \gamma
+    \end{pmatrix} ,
+\end{eqnarray}
+where $\alpha$ and $\gamma$ are unitless constants.
+The curl of the force field is given by
+\begin{equation}\label{eq:berry_curl}
+    \nabla\times\mathbf F = \left( \alpha - \gamma \right) \partial_{x_1}\partial_{x_2}U 
+\end{equation}
+and therefore the force field is not curl free, unless either $\alpha=\gamma$ or $U(\mathbf x)$ is everywhere additively separable in the coordinates $\mathbf x$, namely $U(\mathbf x) = f(x_1)+g(x_2)$ for some functions $f$ and $g$. 
+
+The above argument for two DoF can be generalized to a system with more DoF as follows: instead of $\nabla \times \mathbf F$, consider the matrix $(\nabla \mathbf F)_{ij}\equiv \partial_iF_j$. From Eq.(\ref{eq:HCF-def}) it follows that $\nabla \mathbf F = -\mathcal{A}\nabla\nabla U(\mathbf x)$ where $(\nabla\nabla U)_{i,j} = \partial_{x_i}\partial_{x_j}U$, namely the Hessian of $U$. If it is symmetric, then by Poincare lemma $\mathbf F = \nabla \phi (\mathbf x)$ for some scalar potential $\phi(\mathbf x)$ (we assume a simply connected manifold). Therefore, $\mathbf F$ is not a gradient of a potential only if $\mathcal{A}\nabla\nabla U\neq \nabla\nabla U \mathcal{A}$ (note that both the Hessian and $\mathcal{A}$ are symmetric matrices). This means that the force field $\mathbf F$ is not conservative --- it is not a gradient of a potential --- when the matrix $\mathcal{A}$ and the Hessian of $U$ do not commute, namely $[\mathcal{A},\nabla\nabla U(\mathbf{x})]\neq 0$ at some $\mathbf{x}$.  

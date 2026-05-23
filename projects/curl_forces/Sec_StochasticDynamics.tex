@@ -1,0 +1,117 @@
+Equilibrium systems that can exchange heat with a big enough thermal bath eventually relax to a Boltzmann distribution, where the probability of the system to be in a microstate $\mu_i$ is given by $P(\mu_i)=e^{-H(\mu_i)/k_B T}/Z$. Here $H(\mu_i)$ is the energy of the system at microstate $\mu_i$, $T$ is the bath temperature, $k_B$ is Boltzmann's constant, and $Z$ is the partition function, which is the corresponding normalization. This famous result due Boltzmann is based on conservation of the total energy, 
+\begin{equation}\label{eq:total_energy}
+    H_{tot} = H_{sys}(\mathbf p_{sys},\mathbf x_{sys})+H_{bath}(\mathbf p_{bath},\mathbf x_{bath}) +  U_{int}(\mathbf x_{sys},\mathbf x_{bath}),
+\end{equation}
+where $H_{sys}(\mathbf p_{sys},\mathbf x_{sys})$ is the Hamiltonian of the system with DoF $(\mathbf p_{sys},\mathbf x_{sys})$, $H_{bath}(\mathbf p_{bath},\mathbf x_{bath})$ is the energy of the thermal bath and is only a function of the bath DoF, and $U_{int}(\mathbf x_{sys},\mathbf x_{bath})$ is the energy associated with the interaction between the the system and the bath, which depends on both sets of coordinates but not on their momenta. To get the Boltzmann distribution, it is assumed that $U_{int}(\mathbf x_{sys},\mathbf x_{bath})$ is negligible in comparison to $H_{sys}$ and $H_{bath}$. 
+
+We are interested in systems driven by a non-conservative curl-force, whose Hamiltonian $H_{sys}$ has an anisotropic kinetic energy as in Eq.~\ref{eq:CurlHamiltonians}. If this Hamiltonian has no explicit time dependence, then for an isolated system its value is conserved, and can be viewed as `energy', in the sense that this is the conserved quantity associated with the time translation symmetry of the system. 
+
+In order to describe the statistical mechanics of the driven system when coupled to a thermal bath, we need to make some assumptions regarding the coupling of the system to the bath. Our goal is to use the curl-force Hamiltonian formalism to describe a standard thermal system subject to non-conservative curl-forces. Essentially, if the driving is turned off, we require that the system's dynamics reduce to those of a system in thermal equilibrium.
+Therefore, we assume that the bath itself and the interaction of the system with the bath are the standard equilibrium ones, such that the only source of nonequilibrium is contained within its non-standard Hamiltonian. In terms of $H_{sys}$ and the interaction energy $U_{int}$, this means that the equations of motion of the system DoF are
+\begin{equation}\label{eq:newton_system_bath}
+      m\ddot{\mathbf{ x}}_{sys} = -\mathcal{A}\cdot\nabla U_{sys}(\mathbf x_{sys}) -\nabla U_{int}(\mathbf x_{sys},\mathbf x_{bath}).
+\end{equation}
+In this case, $H_{tot} = H_{sys}+H_{bath} +  U_{int}$ is \emph{not} a conserved quantity, since it is not true anymore that the equations of motion for the system DoF follow the Hamiltonian dynamics associated with 
+$H_{sys}$. Therefore, the Boltzmann distribution is no longer expected to be the steady state distribution describing the system, and in general the system will not relax into an equilibrium state. 
+
+We note that if the system's dynamics were instead described by
+\begin{equation}\label{eq:newton_system_modified}
+    m\ddot{\mathbf{ x}}_{sys} = -\mathcal{A}\cdot\nabla\Big(U_{sys}(\mathbf x_{sys}) + U_{int}(\mathbf x_{sys},\mathbf x_{bath})\Big)
+\end{equation}
+rather than Eq.~\ref{eq:newton_system_bath}, that is, if the interaction with the bath would also scale according to the anisotropy matrix $\mathcal{A}$, then the dynamics would follow the canonical equations of motion, and as a result the total Hamiltonian would be a conserved quantity. The corresponding system would then indeed relax to the Boltzmann distribution associated with $H_{sys}$. However, that case no longer describes the dynamics of a regular particle under the influence of an external curl-force interacting with a bath, and hence it cannot be used to infer the steady state distribution of a particle subject to a non-conservative force. 
+
+\subsection{Stochastic dynamics}
+The equations of motion described in Eq.~\ref{eq:newton_system_bath} have two components: one is the potential (curl) force, $\mathbf F_{pot}=-\mathcal{A}\cdot\nabla U_{sys}$, and the other describes the interaction with the bath, $\mathbf F_{int}=-\nabla U_{int}$. In order to get a stochastic description of the particle's motion, the interaction force is usually coarse grained and described as the combination of a dissipative force and a random fluctuating force. Under the standard assumptions that the bath is large and the interaction energy is small, the assumption that the bath remains in equilibrium is still valid for a system with curl-forces, and we therefore assume that the dissipation and random force satisfy the fluctuation-dissipation relation as usual. 
+We emphasize that the canonical momentum of the curl-force system is not a physically measurable quantity, and the interaction with the bath should depend on the immersed particle's velocity and not on its canonical momentum. This means that the dynamical friction must be proportional to the particle's velocity vector $\dot{\mathbf{x}}$, which is not proportional to the canonical momentum vector $\mathbf{p}$ if $\mathcal{A}$ is not the identity matrix. This ensures that when the potential is turned off, the particle diffuses like a regular particle, and is in line with the literature on Brownian motion in other cases where the canonical momentum $\mathbf{p}$ does not coincide with the inertial momentum $m\dot{\mathbf{x}}$, for example for a charged particle in a magnetic field \cite{taylor1961diffusion, kurcsunoglu1963brownian, czopnik2001brownian, simoes2005kramers, lisy2013brownian}.
+
+With these assumptions, we can write the Klein-Kramers equation describing the underdamped evolution of the probability density function $f(\mathbf{x},\dot{\mathbf{x}})$ of the system as
+\begin{equation}
+    \label{eq:klein_kramers}
+    \frac{\partial f(\mathbf{x}, \dot{\mathbf{x}})}{\partial t} =  \frac{\mathcal (\mathcal A\nabla_{\mathbf{x}} U)^T \cdot \nabla_{\dot{\mathbf{x}}}f}{m}-\nabla_{\mathbf{x}} f \cdot \dot{\mathbf{x}} + \frac{\xi}{m} \nabla_{\dot {\mathbf x}} \cdot(\dot {\mathbf x} f + \frac{k_B T}{m} \nabla_{\dot{\mathbf{x}}}f),
+\end{equation}
+where $\xi$ is the friction coefficient. Here, $\nabla_{\mathbf{x}},\nabla_{\dot {\mathbf x}}$ are the del operators with respect to the coordinates and velocities, respectively. The nonequilibrium nature of this system appears through the anisotropy matrix $\mathcal{A}$ in the convection term, and it can be verified by a direct substitution that the Boltzmann distribution corresponding the curl-force Hamiltonian $H$ is indeed not a steady-state solution of this equation. We further mention that the first two terms are compactly written as
+$\{H,f\}\equiv\nabla_{\mathbf x} H \cdot \nabla_{\mathbf p}f-\nabla_{\mathbf x} f \cdot \nabla_{\mathbf p}H$,
+where $\{H,f\}$ is the Poisson bracket of the curl-force Hamiltonian $H$ (Eq.~\ref{eq:CurlHamiltonians}) and the probability density distribution function $f$.
+
+\subsection{{Steady state}}
+A natural question is then the exact conditions on $U, \mathcal{A},\xi$ and $T$ such that the system has a unique, normalizable steady state. %From Eq.~\ref{eq:klein_kramers} it is clear that this question is equivalent to the exact conditions for the force field $\mathbf{F}=-\mathcal{A}\nabla_{\mathbf{x}}U$ to have a unique normalizable steady state in the Klein-Kramers equation \textcolor{red}{[Omer: it's not clear to me how this sentence is different than the previous one: clearly, we claim that the KK eq. describes the system, so if it has a steady state it describes the physical system]}. 
+The exact conditions for a unique normalizable steady state in a general force field are, as far as we know, not known, though for a given $\mathbf{F}(\mathbf{x})$ this can commonly be done using the Foster--Lyapunov criterion \cite{dolbeault2018varphi}. 
+
+From the next section on, we focus on $\mathcal{A}$ which is positive definite, such that $\alpha,\gamma>0$. Under this assumption it is clear that for bounding potentials the system has a unique normalizable steady state. However, we point out that it is possible that systems with $\alpha<0$ or $\gamma<0$ have a normalizable steady state. A trivial example is the saddle-like potential
+\begin{equation}
+    U(x_1,x_2)=\frac{k}{2}(x_1^2-x_2^2)
+\end{equation}
+combined with the anisotropy matrix
+\begin{eqnarray}
+    \mathcal{A} = \begin{pmatrix}
+         1 & 0 \\
+         0 & -1
+    \end{pmatrix}.
+\end{eqnarray}
+In this case 
+\begin{eqnarray}
+    \mathbf{F} = -\mathcal{A}\cdot\nabla_{\mathbf{x}} U= -k\begin{pmatrix}
+        x_1\\
+        x_2
+    \end{pmatrix}
+\end{eqnarray}
+and this force field, which corresponds to a harmonic potential with a standard kinetic energy, clearly has a normalizable steady state. 
+
+% Note to self: definitely look into \cite{kwon2005structure, qian2001mathematical}.
+
+
+\section{Canonical transformation: multiple temperatures interpretation}\label{sec:Transformation}
+Assuming that $\mathcal{A}$ is positive definite, it is cleat that the kinetic energy of the system is always non-negative. This assumption, however, limits the types of curl-forces that can be described: for example, the purely solenoidal force field $\mathbf{F}=y\hat{x}-x\hat{y}$ requires that either $\alpha$ or $\gamma$ are negative.
+With this assumption, a different perspective to Eq.~\ref{eq:klein_kramers} can be given by the following canonical transformation. We  define a generating function of the second kind \cite{LANDAU1976131},
+\begin{equation}
+    G_2(\mathbf P, \mathbf x) = \mathbf P^T \cdot \mathcal A^{-{1}/{2}}\cdot\mathbf x,
+\end{equation}
+where $\mathbf P$ and $\mathbf x$ are the new momenta and old coordinates, respectively. From it, we obtain the new coordinates and momenta in terms of the old ones as
+\begin{equation}\label{eq:canonical_transformation}
+\begin{split}
+    \mathbf X &= \mathcal A^{-1/2}\mathbf x,\\
+    \mathbf P &= \mathcal A^{1/2} \mathbf p,
+\end{split}
+\end{equation}
+and the transformed Hamiltonian is
+\begin{equation}
+    \tilde{H}(\mathbf X, \mathbf P) = \frac{1}{2m} \mathbf P^2 + \tilde{U}\left(\mathbf X\right),
+\end{equation}
+where $\tilde{U}(\mathbf X) = U( \mathcal{A}^{1/2} \mathbf X) = U(\mathbf{x})$ is the potential energy in terms of the new coordinates. $\tilde{H}$ has an isotropic kinetic energy term with a standard potential term, so in principle it describes a system without any curl-forces. However, the non-conservative nature of the forces is now encoded in the way the system is coupled to the environment, which leads again to nonequilibrium dynamics. 
+Applying this coordinate transformation to the Klein-Kramers equation (Eq.~\ref{eq:klein_kramers}), we obtain
+\begin{align}\label{eq:CK_transformed}
+    \frac{\partial f(\mathbf{X}, \dot{\mathbf{X}})}{\partial t} &= \frac{1}{m}\nabla_{\mathbf{X}} \tilde{U} \cdot \nabla_{\dot{\mathbf{X}}}f-\nabla_{\mathbf{X}} f \cdot \dot{\mathbf{X}} + \frac{\xi}{m} \nabla_{\dot {\mathbf X}} \cdot(\dot {\mathbf X} f + \frac{k_B T}{m} \mathcal{A}^{-1}\cdot\nabla_{\dot{\mathbf{X}}}f) \\
+    &=\{\tilde{H}, f\} + \frac{\xi}{m} \nabla_{\dot {\mathbf X}} \cdot(\dot {\mathbf X} f + \frac{k_B T}{m} \mathcal{A}^{-1}\cdot\nabla_{\dot{\mathbf{X}}}f). \nonumber
+ \end{align}
+This equation can be interpreted as an underdamped motion of a particle under the influence of a potential $\tilde{U}$, where the noise magnitude at each axis is different. It is constructive to interpret 
+\begin{equation}
+    T_i \equiv \mathcal{A}_{ii}^{-1} T
+\end{equation} 
+as the temperatures of a heat reservoir coupled to the $i$-th coordinate. $T_i$ is a physically valid temperature, as it is positive under our earlier assumption that $\mathcal{A}$ is positive definite. This coupling implies that the system is generally out of equilibrium, unless either $T_i$ are all equal, or the different degrees of freedom $X_i$ are decoupled, $\partial_{X_i X_j} U = 0$, and the potential is additively separable in the coordinates. In the latter case, the force field in the single-reservoir description can be expressed as minus the gradient of a potential $\mathbf{F}=-\nabla(\alpha U_1(x) +\gamma U_2(y))$, the system's energy can be written in terms of a standard Hamiltonian $H=\frac{\mathbf{p}^2}{2m}+\alpha U_1(x) +\gamma U_2(y)$ with isotropic kinetic energy, and the system eventually relaxes to the corresponding Boltzmann distribution. This is an alternative explanation for the fact that if in the multiple-reservoirs description the DoF are decoupled, heat cannot flow between the reservoirs and each DoF equilibrates with its own bath \cite{lin2022stochastic, leighton2024information, netz2020approach}. %\textcolor{red}{[Please see what you think about these sources. While they do not explicitly state this, I think it is hinted. In the first paper, they say a non-conservative coupling force is required for heat flow between the two reservoirs. In Sivak's paper they talk about the mutual information, which indicates some coupling between the subsystems. The last paper also has a statement about the EPR (or some other noneq property) vanishing if the coupling vanishes.]}. %In principle, this statement can be generalized to more complex forms of $\mathcal{A}$, namely cases where it has off-diagonal terms, where it might be harder to tell whether the system equilibrates or not. The curl-force description provides a clean interpretation for such systems, where the condition for the system to equilibrate becomes clearer.
+
+In summary, this canonical transformation provides a mapping between Hamiltonian curl-forces and the motion of a particle under the influence of different thermal bath connected to the various DoF, and a correspondingly stretched potential. Indeed, in Eq.~\ref{eq:CK_transformed} there is no longer any curl-force, and the nonequilibrium nature of the system arises solely from the fact that now it is coupled to multiple heat baths. %We also note that the inverse transformation can be used to analyze a non-equilibrium system that is only driven away from equilibrium by coupling different DoF to different thermal baths. 
+
+\subsection{Transforming temperature}
+The mapping defined by $G_2$ uniquely defines not only the new coordinates and momenta, but also the temperatures $T_i$ of the multiple heat baths in the transformed description of the thermal system. The canonical transformation in Eq.~\ref{eq:canonical_transformation} is invertible, so one can consider the inverse mapping of $G_2$,
+\begin{equation}\label{eq:inverse_canonical_transformation}
+\begin{split}
+    \mathbf x &= \mathcal A^{1/2}\mathbf X,\\
+    \mathbf p &= \mathcal A^{-1/2} \mathbf P.
+\end{split}
+\end{equation}
+In a non-thermal dynamical system, this implies that the transformed system describes the same dynamics as the original system, and either descriptions can be used to analyze its properties.
+It is therefore sensible to consider the inverse transformation from a thermal system with multiple heat baths and no curl-forces to a system with a single heat bath and curl-forces. This is arguably the more `useful' direction of the transformation, in the sense that it can describe the origin of a nonequilibrium steady state of thermal systems with multiple baths in terms of a deterministic, non-conservative force, which is conceptually simpler. However, applying the inverse transformation of $G_2$ to a thermal system gives rise to an ambiguity in the temperature $T$ of the single bath, as $T_i=\mathcal{A}_{ii}^{-1}T$ only defines the finite temperature $T$ up to a constant that can be absorbed in $\mathcal{A}$. Clearly, $T$ must be fixed in order to provide a consistent description of the transformed system.
+
+We couldn't find any physical constraint for $T$ other than ensuring that it is consistent with the case where the all the multiple baths have the same temperature, which effectively reduces to a system with a single bath. This still leaves some freedom in the choice of the temperature. Therefore, the inverse transformation of $G_2$ defines a set of dual single-bath systems.
+
+A useful choice is to set the temperature as the geometric mean of the multiple baths, $T=\left(\prod_{i=1}^d T_i\right)^{1/d}$, which implies $\det \mathcal A=1$. Since the temperatures of the multiple baths are inversely related to the components of $\mathcal{A}$, their product ($\det \mathcal{A}$) appears when computing the common denominator of quantities involving addition or subtraction of the temperatures. Then, this substitution immensely simplifies computations.
+
+% We do this by noting that in two dimensions, $\nabla \times \mathbf{F}(\mathbf{x})$ of the single-bath description (Eq.~\ref{eq:berry_curl}) can be expressed in terms of the potential $\tilde{U}(\mathbf{X})$ of the multi-bath system as 
+% \begin{equation}
+%     \nabla \times \mathbf{F}(\mathbf{x}) = (\alpha-\gamma) \partial_{x_1}\partial_{x_2} U = (\alpha-\gamma)\frac{\partial_{X_1}\partial_{X_2} \tilde{U}}{\sqrt{\alpha \gamma}} .
+% \end{equation}
+% \st{Since generally $U$ and $\tilde{U}$ are independent of $\alpha$ and $\gamma$, we must fix them to eliminate the dependence on them in the denominator (which does not appear in the l.h.s. of the equality)}. Further noting that $\alpha=\gamma=1$ is a valid physical choice which represents the identity transformation in the case of equilibrium dynamics (when there are no curl-forces, or the temperature in each direction has the same amplitude), the above normalization rule must allow it. Therefore, we fix $\alpha \gamma=1$. Generalizing to higher dimensions, we set
+% \begin{equation}\label{eq:new_temperature}
+%     \det \mathcal{A} = 1, \quad \text{equivalently, }\quad T=\left(\prod_{i=1}^d T_i\right)^{1/d},
+% \end{equation}
+% i.e., the temperature of the single bath is the geometric mean of the temperatures of the multiple baths.

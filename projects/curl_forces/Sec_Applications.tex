@@ -1,0 +1,69 @@
+In this section we provide two examples for systems that are driven out of equilibrium by different temperatures coupled to different coordinates, and analyze their curl-force representation.
+
+\subsection{Quadratic potential: the Brownian gyrator} 
+The Brownian gyrator is one of the simplest models for a stochastic heat engine. Originally proposed by Filliger and Reimann \cite{filliger2007brownian} and further studied extensively \cite{dotsenko2013two, mancois2018two, bae2021inertial, baldassarri2020engineered, cerasoli2018asymmetry, cerasoli2022spectral, argun2017experimental, martins2026role, chang2021autonomous, dos2021stationary, movilla2021energy, pietzonka2018universal, lin2022stochastic, abdoli2022tunable, chiang2017electrical}, it describes a Brownian particle diffusing in the presence of an anisotropic harmonic potential,
+\begin{equation}\tilde{U}(X, Y) = \frac{1}{2}\left( kX^2 + 2uXY + kY^2 \right),\end{equation}
+with $|u|<k$, and two different random noises amplitudes in the $X$ and $Y$ directions (corresponding to temperatures $T_X$ and $T_Y$, respectively).  
+Due to the harmonicity of the potential, the corresponding stochastic process is an Ornstein–Uhlenbeck (OU) process, which is exactly solvable \cite{risken1996fokker}. The non-equilibrium steady-state of this system exhibits rotational motion, whose magnitude is determined by both the anisotropy of the potential, determined by $u/k$, and the temperature difference between the two heat baths, $T_Y-T_X$ \cite{mancois2018two, bae2021inertial}. By applying the inverse transformation of $G_2$ from the two temperature case of the inertial Brownian gyrator, we offer an alternative interpretation for the source of rotational motion: it can be viewed as a result of a \emph{deterministic} curl-force acting on a particle coupled to a single heat bath. The corresponding potential in the curl-force representation is
+\begin{equation}
+    U(x, y) = \frac{1}{2}\left( \frac{k}{\alpha}x^2 + 2\frac{u xy}{\sqrt{\alpha \gamma}} + \frac{k}{\gamma}y^2 \right) = \frac{1}{2T}\left( {kT_X}x^2+2{u\sqrt{T_x T_y}xy}+kT_yy^2 \right),
+\end{equation}
+and the total force is \begin{align}
+\mathbf{F}(x, y) &\equiv -\mathcal{A}\cdot\nabla_\mathbf{x} U =-(kx+\sqrt{\frac{\alpha}{\gamma}} uy)\hat{x}-(ky+\sqrt{\frac{\gamma}{\alpha}} ux)\hat{y} \\
+&=-(kx+\sqrt{\frac{T_Y}{T_X}} uy)\hat{x}-(ky+\sqrt{\frac{T_X}{T_Y}} ux)\hat{y}. \nonumber
+\end{align} The curl of the force field in this case is constant, given by 
+$\nabla \times \mathbf{F} = u\left({\frac{\alpha-\gamma}{\sqrt{\alpha\gamma}}}\right)$, or $\nabla\times\mathbf{F}=u\left(\frac{T_Y - T_X}{\sqrt{T_X T_Y}}\right)$ in terms of the temperatures of the multiple baths $T_{X,Y}$.
+It is non-vanishing unless either  $\alpha = \gamma$ and hence $T_X = T_Y$ and there is a single termal bath, or $u=0$, namely the principal axes of the potential coincides with the two different thermal baths, such that the $X$ and $Y$ coordinates become decoupled. For $T_X>T_Y$ ($\alpha<\gamma$), the curl is negative, which corresponds to the force field inducing a clockwise circulation. This result is consistent with the results obtained for the inertial Brownian gyrator \cite{mancois2018two, bae2021inertial}. Notably, this qualitative result is purely mechanical, and does not require a solution of the Fokker-Planck equation associated with the stochastic dynamics of the system. It gives an easy way to obtain and intuitive explanation for the origin and the direction of the rotation of the Brownian particle in the two-temperatures setup. 
+
+It is instructive to compare the energetics of the two descriptions. In the Brownian gyrator, heat $\langle \dot{Q}_X \rangle = -\langle \dot{Q}_Y \rangle$ flows from the hot to the cold reservoir, and work is neither applied nor extracted unless an additional external non-conservative force is applied. In the transformed coordinates, the picture is slightly different, as there is only a single heat bath. To find the heat and work rates, we derive the steady state distribution of this system. This can be done explicitly by directly solving the Klein-Kramers equation for the curl-force OU process \cite{risken1996fokker} using computer algebra \cite{gowda2021high}, or by simply transforming the known solution of the underdamped Brownian gyrator \cite{mancois2018two, bae2021inertial} to the curl-force coordinates. The solution is a Gaussian $p(\mathbf{z}) \sim \exp(-\frac{1}{2}\mathbf{z}^T C^{-1} \mathbf{z})$, where $\mathbf{z} = (x, y, \dot{x}, \dot{y})^T$ and $C$ is the steady-state covariance matrix. The energetics of the system are computed directly from $C$. From here on, we fix the temperature to $T=\sqrt{T_X T_Y}$ (and correspondingly $\alpha\gamma=1$) to simplify the expressions. Other choices of $T$ are possible, and the results are dependent on this choice. The power applied on the system by the non-conservative force is
+\begin{equation}\label{eq:work}
+    \langle \dot{W} \rangle = \langle \mathbf{F} \cdot \dot{\mathbf{x}} \rangle = 
+\frac{k_B T\xi u^2(\alpha-\gamma)^2 }{2  \xi^{2}  k + 2  u^{2}  m }.
+\end{equation}
+We note that $\langle \dot{W}\rangle \sim |\nabla \times \mathbf{F}|^2$, such that the curl of the force field is a measure of how far the system is from thermal equilibrium, in the sense that a larger curl implies that more work is applied on the system. 
+We note that Eq.~\ref{eq:work} also implies $\langle \dot{W}\rangle\geq0$: positive work is always applied on the system regardless of the direction of gyration (determined by whether $\alpha > \gamma$ or $\alpha < \gamma$), which is a manifestation the second law: work cannot be extracted from a single heat bath. This emphasizes the difference of this description from the two baths description, where heat flow is from the hot bath to the cold one \cite{bae2021inertial}. In that case, the direction of the flow can be reversed by interchanging the bath temperatures.
+
+Given the solution for $C$, the average heat dissipation rate is also computed directly as $\langle \dot Q \rangle= -\frac{2\xi}{m}\left(\frac{m}{2}(\langle \dot{x}^2\rangle + \langle \dot{y}^2\rangle) - k_B T\right)$ \cite{sekimoto_stochastic_2010}. Since  the system is in a steady state, the work done by the non-conservative force is fully dissipated into the bath as heat, implying also that \begin{equation}\label{eq:heat}
+\langle \dot{Q} \rangle=-\langle \dot{W}\rangle \leq 0.
+\end{equation}
+Finally, this allows the computation of the entropy production rate
+\begin{equation}
+    \langle \dot{S}\rangle=\langle \dot{S}\rangle_\text{system}+\langle \dot{S}\rangle_\text{bath}=\langle \dot{S} \rangle_\text{bath}=-\frac{\langle \dot{Q}\rangle}{T} = \frac{k_B \xi u^2(\alpha-\gamma)^2 }{2  \xi^{2}  k + 2  u^{2}  m } \geq 0.
+\end{equation}
+In terms of the two-bath system parameters, substituting $\alpha=\sqrt{T_Y/T_X}$ and $\gamma=\sqrt{T_X/T_Y}$, we get
+\begin{equation}\label{eq:gyrator_EPR}
+    \langle \dot{S}\rangle = \frac{k_B \xi u^2(T_Y-T_X)^2 }{2T_X T_Y(  \xi^{2}  k +  u^{2}  m)},
+\end{equation}
+which is identical to the EPR obtained for the underdamped gyrator \cite{bae2021inertial}, as expected \cite{godreche2019characterising}: unlike quantities like heat or work, which measure the flow of energy between the different components of the full system (bath, non-conservative force, the system itself), the total entropy production rate measures the irreversibility of the system as a whole, and does not depend on the representation we use to describe it. This reflects the fact that the NESS of the gyrator and the curl-force system are related by a linear coordinate transformation \cite{godreche2019characterising}.
+
+Finally, as a sanity check we also computed the EPR using different choices for the temperature, taking $T$ as the weighted arithmetic or geometric mean of $T_X$ and $T_Y$, $T=wT_X+(1-w)T_Y$ or $T=T_X^wT_Y^{1-w}$ respectively (for $0 < w < 1$). In both cases, the same EPR as in Eq.~\ref{eq:gyrator_EPR} is also obtained. Rates of work and heat, on the other hand, do depend on this choice, because they explicitly depend on the bath's temperature.
+A choice that can be of particular interest is to require that $\langle \dot W\rangle = \langle \dot Q _X \rangle$ and $\langle \dot{Q}\rangle = \langle \dot{Q}_Y\rangle$ (for $T_X>T_Y$), such that the flows of energy into or out of the system is the same in the two descriptions. An exact solution can be obtained by comparing the expressions for the heat flow $\langle \dot{Q} \rangle = -T\langle\dot S\rangle$ with that obtained for the gyrator \cite{bae2021inertial}, which yields the relation
+\begin{align}
+    T = \begin{cases}
+                T_{X, Y} & T_X=T_Y \\
+            \frac{T_X T_Y}{|T_X - T_Y|} & T_X \neq T_Y
+    \end{cases}.
+\end{align}
+We do not know whether this is a general result, or if it is system dependent. Notably, if $T_X \gg T_Y$ (or $T_Y \gg T_X$), then the single bath's temperature for which the heat flows are equal to those in the multi-bath system is approximated by the temperature of the colder bath.
+
+\subsection{Beyond the quadratic potential: gyrator on a ring}
+To illustrate the generality of this framework, we consider the gyration of a particle confined to a ring by the potential $\tilde{U}(R) = \frac{1}{2}k(R-R_0)^2$, where $R=\sqrt{X^2+Y^2}$ is the radial distance from the center of the ring and $R_0$ is its radius \cite{abdoli2025quadrupolar}. The system is coupled to two orthogonal sources of thermal noise with temperatures $T_{X}$ and $T_{Y}$, as in the case of the harmonically confined gyrator. The flux field in this system has been shown to be of a quadrupolar structure, with four alternating regions of clockwise and counter-clockwise rotating currents \cite{abdoli2025quadrupolar}. Transforming the system to the curl-force representation, we obtain the force field
+\begin{equation}
+   \mathbf{F}(\mathbf{x}) \equiv -\mathcal{A}\cdot\nabla_{\mathbf{x}}U = -k\left( 1 - \frac{R_0}{\sqrt{\frac{x^2}{\alpha} + \frac{y^2}{\gamma}}} \right) \mathbf{x} = -k\left( 1 - \frac{\sqrt{T}R_0}{\sqrt{T_X{x^2} + T_Yy^2}} \right) \mathbf{x}
+\end{equation}
+where $\alpha = T/T_X$ and $\gamma = T/T_Y$ with $T$ the temperature of the transformed, single-reservoir system. This force field is radial and is confining to the ring, which is the ellipse ${\frac{x^2}{\alpha} + \frac{y^2}{\gamma}} = R_0^2$ in the dual system. Fig.~\ref{fig:curl_ring_gyrator}a shows the force field and the value of its curl,
+\begin{equation}
+    (\nabla \times \mathbf{F})\cdot\hat{z} = \frac{R_0 k \left(\alpha - \gamma\right) x y}{\alpha\gamma\left( \frac{x^2}{\alpha} + \frac{y^2}{\gamma} \right)^{3/2}} = \frac{R_0 k \sqrt{T} (T_Y - T_X)xy}{(T_X x^2 + T_Y y^2)^{3/2}}.
+\end{equation}
+Unlike the case of the harmonic gyrator, the curl of the force field is not constant, and has a quadrupolar structure instead. For $T_X>T_Y$ ($\alpha<\gamma$), it is negative (positive) in the 1st and 3rd (2nd, 4th) quadrants, corresponding to clockwise (counter-clockwise) circulation. Again, the direction of circulation predicted by the sign of $\nabla \times \mathbf{F}$ coincides with those calculated for the gyrator on a ring \cite{abdoli2025quadrupolar}. We numerically verify that the same direction is also observed in the curl-force system by performing Langevin simulations \cite{rackauckas2017differentialequations, rackauckas2017adaptive, rossler2010runge} of the dynamics, as shown in Fig.~\ref{fig:curl_ring_gyrator}b. Unlike the case of the harmonic Brownian gyrator, in this case the steady-state solution has no exact analytical solution, and requires approximations or numerical solutions. Hence, in this case, the easy exact computation of $\nabla \times \mathbf{F}$ provides a simple method for obtaining some qualitative properties of the system, which are otherwise not directly accessible.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{velocity_field.pdf}
+    \caption{(a) The force field $\mathbf{F}=m\ddot{\mathbf{x}}$ of the single-bath system dual to the ring gyrator (arrows), and the value of its curl $\nabla\times\mathbf{F}$ (color gradient), for $k = 20, R_0 = 1, \alpha = \sqrt{3/2}$ and $\gamma = \sqrt{2/3}$. Unlike the case of the harmonically confined Brownian gyrator, here $\nabla \times \mathbf{F}$ is not constant, and has a quadrupolar structure instead.
+    (b) Simulation results for the probability density and currents averaged over 25,000 Langevin trajectories of the same system coupled to a bath with temperature $k_BT=\sqrt{3/2}$ and drag coefficient $\xi=1$ ($k_B = 1$). This temperature corresponds to $T=\sqrt{T_Y T_X}$ with $T_X= 1$ and $T_Y=3/2$, matching the choice of $\alpha, \gamma$ in the left panel.
+    The steady state probability density function is shown in the background (white - low density, black - high density). The arrows indicate the empirical spatial probability current $\mathbf{J}_\mathbf{x}=\langle \mathbf{v} | \mathbf{x}\rangle f$, where $\langle \mathbf{v} | \mathbf{x}\rangle$ is the average velocity conditioned on position.
+    A positive value of $\nabla\times\mathbf{F}$ in (a) corresponds to counter-clockwise rotation in (b) and a negative value corresponds to clockwise rotation. These directions are in agreement with those found for the gyrator on a ring \cite{abdoli2025quadrupolar} for the case $T_Y>T_X$ (corresponding $\alpha>\gamma$ as evaluated here).
+    The ring $X^2 + Y^2 = R_0^2$, which is transformed into an ellipse ${\frac{x^2}{\alpha} + \frac{y^2}{\gamma}} =R_0^2$ in the dual system, is shown in a solid line in both figures.}
+    \label{fig:curl_ring_gyrator}
+\end{figure}
