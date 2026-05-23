@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistical Mechanics of Hamiltonian Curl-Force Systems</title>
+
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <style>
+        :root {
+            --ink-black: #000000;
+            --paper-cream: #faf7f0;
+            --pop-pink: #ff3377;
+            --pop-cyan: #00d8ff;
+            --pop-yellow: #ffcc00;
+
+            --thick-border: 6px solid var(--ink-black);
+            --block-shadow-large: 20px 20px 0px var(--ink-black);
+            --block-shadow-small: 8px 8px 0px var(--ink-black);
+            --halftone-grid: radial-gradient(var(--ink-black) 12%, transparent 12%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Times New Roman', Times, 'Nimbus Roman No9 L', serif;
+            background-color: #ebdcb9;
+            background-image: var(--halftone-grid);
+            background-size: 30px 30px;
+            color: var(--ink-black);
+            padding: 4vw;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .poster-canvas {
+            width: 100%;
+            max-width: 1600px;
+            background: var(--paper-cream);
+            border: var(--thick-border);
+            padding: 4vw;
+            box-shadow: var(--block-shadow-large);
+            display: flex;
+            flex-direction: column;
+            gap: 3vw;
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            border: var(--thick-border);
+            background: var(--pop-yellow);
+            padding: 2.5vw;
+            box-shadow: var(--block-shadow-small);
+        }
+
+        header h1 {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: clamp(1.8rem, 3.2vw, 4.5rem);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1.0;
+            color: var(--ink-black);
+            text-shadow: 4px 4px 0px #ffffff;
+            margin-bottom: 1.2vw;
+        }
+
+        .meta-mesh {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1vw;
+        }
+
+        .meta-mesh span {
+            background: var(--paper-cream);
+            border: var(--thick-border);
+            padding: 4px 14px;
+            box-shadow: 4px 4px 0px var(--ink-black);
+            font-weight: bold;
+        }
+
+        .meta-mesh .star-node {
+            background: var(--pop-pink) !important;
+            color: #ffffff !important;
+        }
+
+        .affiliation-panel {
+            display: inline-block;
+            font-family: 'Times New Roman', serif;
+            font-size: 1rem;
+            font-weight: bold;
+            font-style: italic;
+            background: var(--paper-cream);
+            border: 3px solid var(--ink-black);
+            padding: 4px 12px;
+            box-shadow: 4px 4px 0px var(--ink-black);
+            margin: 0 auto;
+        }
+
+        /* --- TWO-COLUMN LAYOUT --- */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3vw;
+            width: 100%;
+        }
+
+        /* --- PANELS --- */
+        .scaffold-cell {
+            background: #ffffff;
+            border: var(--thick-border);
+            padding: 2.5vw;
+            position: relative;
+            box-shadow: var(--block-shadow-large);
+        }
+
+        .scaffold-cell::before {
+            content: "[0" attr(data-index) "]";
+            position: absolute;
+            top: -16px;
+            left: 30px;
+            background: var(--ink-black);
+            color: #ffffff;
+            font-family: monospace;
+            font-size: 0.8rem;
+            padding: 2px 12px;
+            letter-spacing: 1.5px;
+            font-weight: bold;
+        }
+
+        .scaffold-cell.pink-mesh  { background-image: radial-gradient(rgba(255,51,119,0.08) 15%, transparent 15%); background-size: 20px 20px; }
+        .scaffold-cell.cyan-mesh  { background-image: radial-gradient(rgba(0,216,255,0.08) 15%, transparent 15%); background-size: 20px 20px; }
+        .scaffold-cell.amber-mesh { background-image: radial-gradient(rgba(255,204,0,0.08) 15%, transparent 15%); background-size: 20px 20px; }
+        .scaffold-cell.solid-yellow { background-color: var(--pop-yellow); }
+
+        h2 {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: clamp(1.2rem, 1.6vw, 2.2rem);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5vw;
+            color: var(--ink-black);
+            border-bottom: var(--thick-border);
+            padding-bottom: 0.4vw;
+        }
+
+        p, li {
+            font-size: clamp(1rem, 1.15vw, 1.4rem);
+            line-height: 1.65;
+            margin-bottom: 1.2vw;
+            text-align: justify;
+        }
+
+        ul { padding-left: 1.4em; margin-bottom: 1vw; }
+        li { margin-bottom: 0.4vw; }
+
+        /* --- EQUATION SLABS --- */
+        .equation-slab-feature {
+            background: var(--paper-cream);
+            border: var(--thick-border);
+            padding: 2vw 3vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            overflow: visible;
+            white-space: normal;
+            box-shadow: 12px 12px 0px var(--ink-black);
+            position: relative;
+            z-index: 5;
+        }
+
+        .equation-slab-feature.slab-cyan    { background-color: rgba(0,216,255,0.12); border-color: var(--pop-cyan); }
+        .equation-slab-feature.slab-magenta { background-color: rgba(255,51,119,0.12); border-color: var(--pop-pink); }
+        .equation-slab-feature.slab-amber   { background-color: rgba(255,204,0,0.20);  border-color: var(--pop-yellow); }
+
+        .equation-slab-feature .MathJax {
+            font-size: clamp(1rem, 1.5vw, 2rem) !important;
+            width: 100% !important;
+            text-align: center !important;
+        }
+
+        /* inner inline equation box */
+        .eq-box {
+            background: var(--paper-cream);
+            border: 3px solid var(--ink-black);
+            padding: 1vw 1.5vw;
+            margin: 0.8vw 0;
+            box-shadow: 6px 6px 0px var(--ink-black);
+            text-align: center;
+        }
+
+        /* tag labels on slabs */
+        .slab-label {
+            position: absolute;
+            top: -16px;
+            right: 30px;
+            background: var(--pop-pink);
+            color: #fff;
+            font-family: monospace;
+            font-size: 0.78rem;
+            font-weight: bold;
+            padding: 2px 10px;
+            letter-spacing: 1px;
+        }
+
+        /* --- ARROW CONNECTOR --- */
+        .transform-arrow {
+            text-align: center;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: clamp(1.4rem, 2vw, 2.8rem);
+            letter-spacing: 2px;
+            padding: 0.5vw 0;
+            color: var(--pop-pink);
+            text-shadow: 3px 3px 0 var(--ink-black);
+        }
+
+        /* --- MAPPING DISPLAY --- */
+        .mapping-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1.5vw;
+            align-items: center;
+            margin: 1vw 0;
+        }
+
+        .mapping-box {
+            background: #fff;
+            border: 4px solid var(--ink-black);
+            padding: 1vw;
+            text-align: center;
+            box-shadow: 6px 6px 0 var(--ink-black);
+            font-size: clamp(0.9rem, 1.1vw, 1.3rem);
+        }
+
+        .mapping-box.hot  { background: rgba(255,51,119,0.15); }
+        .mapping-box.cold { background: rgba(0,216,255,0.15); }
+
+        .mapping-arrow {
+            font-family: 'Impact', sans-serif;
+            font-size: clamp(1.2rem, 1.8vw, 2.5rem);
+            color: var(--pop-pink);
+            text-shadow: 2px 2px 0 var(--ink-black);
+            text-align: center;
+        }
+
+        /* --- HIGHLIGHT CALLOUT --- */
+        .callout {
+            background: var(--pop-cyan);
+            border: var(--thick-border);
+            padding: 1vw 1.5vw;
+            margin: 1vw 0;
+            box-shadow: 6px 6px 0 var(--ink-black);
+            font-weight: bold;
+            font-size: clamp(0.95rem, 1.1vw, 1.3rem);
+        }
+
+        .callout.pink-call { background: rgba(255,51,119,0.2); }
+        .callout.yellow-call { background: var(--pop-yellow); }
+
+        /* --- KEY RESULTS LIST --- */
+        .key-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-list li {
+            border-left: 6px solid var(--ink-black);
+            padding: 0.6vw 1vw;
+            margin-bottom: 0.8vw;
+            background: rgba(255,255,255,0.6);
+            text-align: left;
+        }
+
+        .key-list li::before { content: "▶ "; font-weight: bold; }
+
+        /* --- FOOTER --- */
+        footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            border: var(--thick-border);
+            background: #ffffff;
+            padding: 2vw;
+            font-family: monospace;
+            font-size: 1rem;
+            font-weight: 900;
+            box-shadow: var(--block-shadow-small);
+        }
+
+        /* --- PRINT --- */
+        @media print {
+            @page { size: A0 portrait; margin: 1.5cm; }
+
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+            body {
+                padding: 0;
+                background: #fff !important;
+                background-image: none !important;
+                min-height: unset;
+                display: block;
+            }
+
+            .poster-canvas {
+                border: 6px solid #000;
+                box-shadow: none;
+                padding: 1cm;
+                max-width: 100%;
+                gap: 0.7cm;
+            }
+
+            .scaffold-cell,
+            .equation-slab-feature,
+            header, footer,
+            #poster-header, #poster-affiliation, #poster-footer {
+                transform: none !important;
+                box-shadow: none !important;
+            }
+
+            .scaffold-cell,
+            .equation-slab-feature,
+            header, footer {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .scaffold-cell { padding: 0.5cm; }
+            .equation-slab-feature { padding: 0.4cm 0.8cm; margin: 0.2cm 0; }
+            header { padding: 0.5cm; }
+            footer { padding: 0.4cm; }
+
+            .two-col { gap: 0.5cm; }
+            .dynamic-stack { gap: 0.5cm; }
+
+            h1 { font-size: 3rem; }
+            h2 { font-size: 1.6rem; margin-bottom: 0.35cm; }
+            p, li { font-size: 1rem; margin-bottom: 0.25cm; }
+
+            .scaffold-cell::before {
+                position: relative;
+                top: unset; left: unset;
+                display: inline-block;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body class="tex2jax_process">
+
+<div class="poster-canvas">
+
+    <!-- HEADER -->
+    <header id="poster-header">
+        <h1>Statistical Mechanics of Hamiltonian Curl-Force Systems</h1>
+        <div class="meta-mesh">
+            <span class="star-node">Omer Chor</span>
+            <span>Aljaž Godec</span>
+            <span>Oren Raz</span>
+        </div>
+        <div class="affiliation-panel" id="poster-affiliation">
+            Department of Physics of Complex Systems, Weizmann Institute of Science, Rehovot, Israel
+        </div>
+    </header>
+
+    <!-- ROW 1: two intro panels side by side -->
+    <div class="two-col" id="interactive-stack">
+
+        <!-- PANEL 1: Motivation -->
+        <div class="scaffold-cell cyan-mesh">
+            <h2>Motivation</h2>
+            <p>
+                Equilibrium systems coupled to a single heat bath always relax to the
+                <strong>Boltzmann distribution</strong> $P \propto e^{-H/k_BT}$,
+                fully determined by $H$ and $T$. No such universal principle exists for
+                non-equilibrium steady states (NESS).
+            </p>
+            <p>
+                Certain two-dimensional systems admit a Hamiltonian description even when
+                the force field is <em>non-conservative</em>. We ask:
+            </p>
+            <div class="callout yellow-call">
+                Can the NESS of a Hamiltonian curl-force system be described by
+                its Boltzmann distribution?
+            </div>
+            <p style="margin-top:1vw; margin-bottom:0;">
+                <strong>Answer:</strong> No — but the Hamiltonian structure reveals a
+                clean mapping to a different class of nonequilibrium system.
+            </p>
+        </div>
+
+        <!-- PANEL 2: What are curl-forces? -->
+        <div class="scaffold-cell pink-mesh">
+            <h2>Hamiltonian Curl-Forces</h2>
+            <p>
+                The unique Hamiltonian yielding a <em>velocity-independent</em> force [1] is:
+            </p>
+            <div class="eq-box">
+                $$H(\mathbf{p},\mathbf{x}) = \frac{1}{2m}\mathbf{p}^T \mathcal{A}\, \mathbf{p} + U(\mathbf{x})$$
+            </div>
+            <p>
+                where $\mathcal{A}=\mathrm{diag}(\alpha,\gamma)$ is a symmetric, position-independent matrix.
+                The resulting force is
+                $\mathbf{F} = -\mathcal{A}\nabla U$,
+                with curl
+            </p>
+            <div class="eq-box">
+                $$\nabla\times\mathbf{F} = (\alpha-\gamma)\,\partial_{x_1}\partial_{x_2}U$$
+            </div>
+            <p style="margin-bottom:0;">
+                Non-zero whenever $\alpha\neq\gamma$ and $U$ is not additively separable —
+                i.e.\ the system is genuinely <strong>non-conservative</strong>.
+            </p>
+        </div>
+    </div>
+
+    <!-- EQUATION SLAB: Klein-Kramers -->
+    <div class="equation-slab-feature slab-cyan" style="position:relative;">
+        <span class="slab-label">KLEIN–KRAMERS EQ.</span>
+        $$\frac{\partial f}{\partial t}
+        = \frac{(\mathcal{A}\nabla_{\mathbf{x}} U)^T\!\cdot\nabla_{\dot{\mathbf{x}}}f}{m}
+          -\nabla_{\mathbf{x}} f\cdot\dot{\mathbf{x}}
+          + \frac{\xi}{m}\nabla_{\dot{\mathbf{x}}}\cdot\!\left(\dot{\mathbf{x}}f
+            + \frac{k_BT}{m}\nabla_{\dot{\mathbf{x}}}f\right)$$
+    </div>
+
+    <!-- ROW 2: stat mech + transformation -->
+    <div class="two-col">
+
+        <!-- PANEL 3: Why Boltzmann fails -->
+        <div class="scaffold-cell amber-mesh">
+            <h2>Why Boltzmann Fails</h2>
+            <p>
+                Standard bath coupling gives equations of motion
+                $$m\ddot{\mathbf{x}} = -\mathcal{A}\nabla U_\text{sys} - \nabla U_\text{int}$$
+                The friction and noise act on the physical velocity $\dot{\mathbf{x}}$,
+                <em>not</em> on the canonical momentum $\mathbf{p}$.
+            </p>
+            <p>
+                Consequently, $H_\text{tot} = H_\text{sys}+H_\text{bath}+U_\text{int}$
+                is <strong>not conserved</strong>: the system cannot relax to the
+                Boltzmann distribution
+                $P\propto e^{-H/k_BT}$.
+            </p>
+            <div class="callout pink-call">
+                Substitution of $e^{-H/k_BT}$ into the Klein-Kramers equation
+                yields a non-zero time derivative — confirmed directly by inspection.
+            </div>
+        </div>
+
+        <!-- PANEL 4: Main result — Canonical transformation -->
+        <div class="scaffold-cell cyan-mesh">
+            <h2>Main Result: Canonical Transformation</h2>
+            <p>
+                Generating function $G_2 = \mathbf{P}^T\mathcal{A}^{-1/2}\mathbf{x}$ defines
+                new coordinates and momenta:
+            </p>
+            <div class="eq-box">
+                $$\mathbf{X} = \mathcal{A}^{-1/2}\mathbf{x},\qquad
+                  \mathbf{P} = \mathcal{A}^{+1/2}\mathbf{p}$$
+            </div>
+            <p>
+                The transformed Hamiltonian $\tilde{H}=\frac{\mathbf{P}^2}{2m}+\tilde{U}(\mathbf{X})$
+                has <strong>isotropic</strong> kinetic energy — no curl-forces.
+                The non-equilibrium nature reappears in the noise: each axis $i$ is
+                effectively coupled to a bath at a different temperature,
+            </p>
+            <div class="eq-box">
+                $$T_i \equiv \mathcal{A}_{ii}^{-1}\,T$$
+            </div>
+            <p style="margin-bottom:0;">
+                This establishes an exact duality between
+                <strong>Hamiltonian curl-force systems</strong> and
+                <strong>multi-temperature gyrators</strong>.
+            </p>
+        </div>
+    </div>
+
+    <!-- EQUATION SLAB: the mapping -->
+    <div class="equation-slab-feature slab-magenta" style="position:relative;">
+        <span class="slab-label">THE DUALITY</span>
+        $$\underbrace{\text{single bath } T,\ \mathcal{A}\neq\mathbf{1},\
+          \mathbf{F}=-\mathcal{A}\nabla U}_{\text{Hamiltonian curl-force system}}
+        \;\;\stackrel{G_2}{\Leftrightarrow}\;\;
+        \underbrace{\text{baths } T_i=\mathcal{A}_{ii}^{-1}T,\
+          \tilde{\mathbf{F}}=-\nabla\tilde{U}}_{\text{multi-temperature gyrator}}$$
+    </div>
+
+    <!-- ROW 3: two application panels -->
+    <div class="two-col">
+
+        <!-- PANEL 5: Application 1 — Brownian gyrator -->
+        <div class="scaffold-cell pink-mesh">
+            <h2>Application: Brownian Gyrator [2]</h2>
+            <p>
+                Harmonic potential $\tilde{U}(X,Y)=\frac{1}{2}(kX^2+2uXY+kY^2)$ with
+                baths $T_X\neq T_Y$.  Applying the inverse transformation gives a
+                curl-force system with constant curl:
+            </p>
+            <div class="eq-box">
+                $$\nabla\times\mathbf{F} = u\!\left(\frac{T_Y-T_X}{\sqrt{T_XT_Y}}\right)$$
+            </div>
+            <ul>
+                <li>Sign of curl <strong>predicts the direction</strong> of gyration without solving the Fokker–Planck equation.</li>
+                <li>Work is always <em>applied</em> to the curl-force system (single bath); heat flows between baths in the dual picture.</li>
+                <li>The <strong>entropy production rate</strong> is identical in both representations:
+                    $$\langle\dot{S}\rangle = \frac{k_B\xi u^2(T_Y-T_X)^2}{2T_XT_Y(\xi^2 k+u^2 m)}$$
+                </li>
+            </ul>
+        </div>
+
+        <!-- PANEL 6: Application 2 — Ring gyrator -->
+        <div class="scaffold-cell amber-mesh">
+            <h2>Application: Gyrator on a Ring [3]</h2>
+            <p>
+                Confining potential $\tilde{U}(R)=\frac{1}{2}k(R-R_0)^2$ with two
+                orthogonal baths.  The dual curl-force field is radial:
+                $$\mathbf{F}(\mathbf{x}) = -k\!\left(1 - \frac{\sqrt{T}\,R_0}{\sqrt{T_Xx^2+T_Yy^2}}\right)\mathbf{x}$$
+            </p>
+            <p>The curl has a <strong>quadrupolar</strong> structure:</p>
+            <div class="eq-box">
+                $$(\nabla\times\mathbf{F})\cdot\hat{z}
+                  = \frac{R_0 k\sqrt{T}(T_Y-T_X)\,xy}{(T_Xx^2+T_Yy^2)^{3/2}}$$
+            </div>
+            <div class="callout">
+                Four alternating circulation regions — matching Langevin simulations
+                and prior results for the ring gyrator, without solving the
+                Fokker–Planck equation.
+            </div>
+        </div>
+    </div>
+
+    <!-- EQUATION SLAB: EPR invariance -->
+    <div class="equation-slab-feature slab-amber" style="position:relative;">
+        <span class="slab-label">EPR INVARIANCE</span>
+        $$\langle\dot{S}\rangle_{\text{curl-force}} \;=\; \langle\dot{S}\rangle_{\text{gyrator}}
+        \qquad\text{(invariant under linear coordinate transformation)}$$
+    </div>
+
+    <!-- PANEL 7: Key takeaways — full width -->
+    <div class="scaffold-cell solid-yellow">
+        <h2>Summary &amp; Outlook</h2>
+        <ul class="key-list">
+            <li>
+                Hamiltonian curl-force systems <strong>do not</strong> relax to the corresponding
+                Boltzmann distribution when coupled to a heat bath.
+            </li>
+            <li>
+                A canonical transformation maps them exactly to multi-temperature systems.
+                The curl $\nabla\times\mathbf{F}$ in the dual picture predicts the
+                <strong>direction and structure</strong> of rotational probability currents.
+            </li>
+            <li>
+                The EPR is the same in both representations; heat and work rates differ
+                — the two descriptions are physically distinguishable.
+            </li>
+            <li>
+                <strong>Experimental promise:</strong> curl-forces are readily generated via
+                optical tweezers, offering a route to experimentally simulate
+                multi-temperature dynamics.
+            </li>
+            <li>
+                <strong>Open questions:</strong> overdamped regime, more general Hamiltonians,
+                connection to information engines, unified nonequilibrium theory.
+            </li>
+        </ul>
+    </div>
+
+    <!-- REFERENCES PANEL -->
+    <div class="scaffold-cell" style="background:#fff;">
+        <h2>References</h2>
+        <ol style="padding-left:1.6em; margin:0;">
+            <li style="margin-bottom:0.6vw;">
+                M. V. Berry &amp; P. Shukla,
+                <em>Hamiltonian curl forces.</em>
+                Proc. R. Soc. A <strong>471</strong>, 20150002 (2015).
+            </li>
+            <li style="margin-bottom:0.6vw;">
+                R. Filliger &amp; P. Reimann,
+                <em>Brownian gyrator: A minimal heat engine on the nanoscale.</em>
+                Phys. Rev. Lett. <strong>99</strong>, 230602 (2007).
+            </li>
+            <li style="margin-bottom:0;">
+                I. Abdoli &amp; H. Löwen,
+                <em>Quadrupolar gyration of a Brownian particle in a confining ring.</em>
+                npj Soft Matter <strong>2</strong>, 5 (2026).
+            </li>
+        </ol>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="poster-footer">
+        <div>
+            <span style="color:var(--pop-pink); font-weight:900;">THIS WORK:</span>
+            Chor, Godec &amp; Raz, <em>Statistical mechanics of Hamiltonian curl-force systems</em> (2026)
+        </div>
+        <div>
+            Correspondence:
+            <span style="background:var(--pop-yellow); padding:3px 10px; border:3px solid #000; font-family:monospace; font-weight:bold;">
+                omer.chor@weizmann.ac.il
+            </span>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cells = document.querySelectorAll('.scaffold-cell');
+        const slabs = document.querySelectorAll('.equation-slab-feature');
+
+        cells.forEach((el, i) => {
+            el.setAttribute('data-index', i + 1);
+            const tilt  = (i % 2 === 0) ? -0.5 : 0.4;
+            const skew  = (i % 4 === 0) ? -0.6 : (i % 4 === 2) ? 0.5 : 0;
+            const moveY = (i % 3 === 0) ? 7 : (i % 3 === 1) ? -5 : 3;
+            el.style.transform = `skewX(${skew}deg) rotate(${tilt}deg) translateY(${moveY}px)`;
+        });
+
+        slabs.forEach((el, i) => {
+            const tilt = (i % 2 === 0) ? 0.5 : -0.4;
+            el.style.transform = `rotate(${tilt}deg) scale(1.01)`;
+        });
+
+        document.getElementById("poster-header").style.transform = "rotate(-0.3deg)";
+        document.getElementById("poster-affiliation").style.transform = "rotate(0.2deg)";
+        document.getElementById("poster-footer").style.transform = "rotate(0.25deg)";
+    });
+</script>
+
+</body>
+</html>
