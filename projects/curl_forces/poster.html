@@ -42,8 +42,8 @@
          </div>
     </header>
 
-    <!-- ROW 1: two intro panels side by side -->
-    <div class="two-col" id="interactive-stack">
+    <!-- ROW 1: three intro panels -->
+    <div class="three-col" id="interactive-stack">
 
         <!-- PANEL 1: Motivation -->
         <div class="scaffold-cell cyan-mesh">
@@ -78,7 +78,7 @@
                 $$H(\mathbf{p},\mathbf{x}) = \frac{1}{2m}\mathbf{p}^T \mathcal{A}\, \mathbf{p} + U(\mathbf{x})$$
             </div>
             <p>
-                where $\mathcal{A}$ is a symmetric, position-independent matrix. 
+                where $\mathcal{A}$ is a symmetric, position-independent matrix.
             </p>
             <p>
                 In 2D, WLOG $\mathcal{A}=\mathrm{diag}(\alpha,\gamma)$.
@@ -91,21 +91,17 @@
                 Non-zero whenever $\alpha\neq\gamma$ and $U$ is not additively separable —
                 i.e. the system is genuinely <strong>non-conservative</strong>.
             </p>
+
+            <!-- EQUATION SLAB: Klein-Kramers -->
+        <div class="equation-slab-feature slab-cyan" style="position:relative; margin-top:3vw;">
+            <span class="slab-label">KLEIN–KRAMERS EQ.</span>
+            $$\frac{\partial f}{\partial t}
+            = \frac{(\mathcal{A}\nabla_{\mathbf{x}} U)^T\!\cdot\nabla_{\dot{\mathbf{x}}}f}{m}
+            -\nabla_{\mathbf{x}} f\cdot\dot{\mathbf{x}}
+            + \frac{\xi}{m}\nabla_{\dot{\mathbf{x}}}\cdot\!\left(\dot{\mathbf{x}}f
+                + \frac{k_BT}{m}\nabla_{\dot{\mathbf{x}}}f\right)$$
         </div>
-    </div>
-
-    <!-- EQUATION SLAB: Klein-Kramers -->
-    <div class="equation-slab-feature slab-cyan" style="position:relative;">
-        <span class="slab-label">KLEIN–KRAMERS EQ.</span>
-        $$\frac{\partial f}{\partial t}
-        = \frac{(\mathcal{A}\nabla_{\mathbf{x}} U)^T\!\cdot\nabla_{\dot{\mathbf{x}}}f}{m}
-          -\nabla_{\mathbf{x}} f\cdot\dot{\mathbf{x}}
-          + \frac{\xi}{m}\nabla_{\dot{\mathbf{x}}}\cdot\!\left(\dot{\mathbf{x}}f
-            + \frac{k_BT}{m}\nabla_{\dot{\mathbf{x}}}f\right)$$
-    </div>
-
-    <!-- ROW 2: stat mech + transformation -->
-    <div class="two-col">
+        </div>
 
         <!-- PANEL 3: Why Boltzmann fails -->
         <div class="scaffold-cell amber-mesh">
@@ -119,8 +115,7 @@
             <p>
                 Consequently, $H_\text{tot} = H_\text{sys}+H_\text{bath}+U_\text{int}$
                 is <strong>not conserved</strong>: the system cannot relax to the
-                Boltzmann distribution
-                $P\propto e^{-H/k_BT}$.
+                Boltzmann distribution $P\propto e^{-H/k_BT}$.
             </p>
             <div class="callout pink-call">
                 Substitution of $e^{-H/k_BT}$ into the Klein-Kramers equation
@@ -128,7 +123,12 @@
             </div>
         </div>
 
-        <!-- PANEL 4: Main result — Canonical transformation -->
+    </div>
+
+    <!-- MAIN RESULT + DUALITY SLAB: side by side -->
+    <div class="two-col" style="align-items:stretch;">
+
+        <!-- PANEL 4: Main result -->
         <div class="scaffold-cell cyan-mesh">
             <h2>Main Result: Canonical Transformation</h2>
             <p>
@@ -154,16 +154,17 @@
                 <strong>multi-temperature gyrators</strong>.
             </p>
         </div>
-    </div>
 
-    <!-- EQUATION SLAB: the mapping -->
-    <div class="equation-slab-feature slab-magenta magenta-mesh" style="position:relative;">
-        <span class="slab-label">THE DUALITY</span>
-        $$\underbrace{\text{single bath } T,\ \mathcal{A}\neq\mathbf{1},\
-          \mathbf{F}=-\mathcal{A}\nabla U}_{\text{Hamiltonian curl-force system}}
-        \;\;\stackrel{G_2}{\Leftrightarrow}\;\;
-        \underbrace{\text{multiple baths } T_i=\mathcal{A}_{ii}^{-1}T, \
-          \tilde{\mathbf{F}}=-\nabla\tilde{U}}_{\text{multi-temperature gyrator}}$$
+        <!-- EQUATION SLAB: the mapping -->
+        <div class="equation-slab-feature slab-magenta" style="position:relative; margin:0;">
+            <span class="slab-label">THE DUALITY</span>
+            $$\underbrace{\text{single bath } T,\ \mathcal{A}\neq\mathbf{1},\
+              \mathbf{F}=-\mathcal{A}\nabla U}_{\text{Hamiltonian curl-force system}}
+            \;\;\stackrel{G_2}{\Leftrightarrow}\;\;
+            \underbrace{\text{multiple baths } T_i=\mathcal{A}_{ii}^{-1}T, \
+              \tilde{\mathbf{F}}=-\nabla\tilde{U}}_{\text{multi-temperature gyrator}}$$
+        </div>
+
     </div>
 
     <!-- ROW 3: two application panels -->
@@ -288,8 +289,8 @@
             el.setAttribute('data-index', i + 1);
             const tilt  = (i % 2 === 0) ? -0.5 : 0.4;
             const skew  = (i % 4 === 0) ? -0.6 : (i % 4 === 2) ? 0.5 : 0;
-            const moveY = (i % 3 === 0) ? 7 : (i % 3 === 1) ? -5 : 3;
-            el.style.transform = `skewX(${skew}deg) rotate(${tilt}deg) translateY(${moveY}px)`;
+            const moveY = (i % 3 === 0) ? 0.3 : (i % 3 === 1) ? -0.2 : 0.15;
+            el.style.transform = `skewX(${skew}deg) rotate(${tilt}deg) translateY(${moveY}vw)`;
         });
 
         slabs.forEach((el, i) => {

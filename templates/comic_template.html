@@ -112,11 +112,11 @@
             }
 
             let tiltMagnitude = (i % 2 === 0) ? -0.6 : 0.5;
-            let offsetY = (i % 3 === 0) ? 8 : (i % 3 === 1) ? -6 : 4;
+            let offsetY = (i % 3 === 0) ? 0.35 : (i % 3 === 1) ? -0.25 : 0.17;
             let skewX = (i % 4 === 0) ? -0.8 : (i % 4 === 2) ? 0.6 : 0;
 
             if (el.classList.contains('scaffold-cell')) {
-                el.style.transform = `skewX(${skewX}deg) rotate(${tiltMagnitude}deg) translateY(${offsetY}px)`;
+                el.style.transform = `skewX(${skewX}deg) rotate(${tiltMagnitude}deg) translateY(${offsetY}vw)`;
             } else if (el.classList.contains('equation-slab-feature')) {
                 el.style.transform = `rotate(${-tiltMagnitude * 1.2}deg) scale(1.02)`;
             }

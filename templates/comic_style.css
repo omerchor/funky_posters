@@ -207,7 +207,7 @@ footer {
     box-shadow: var(--block-shadow-small);
 }
 
-/* --- TWO-COLUMN LAYOUT --- */
+/* --- MULTI-COLUMN LAYOUTS --- */
 .two-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -215,12 +215,20 @@ footer {
     width: 100%;
 }
 
+.three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3vw;
+    width: 100%;
+}
+
 /* --- INNER INLINE EQUATION BOX --- */
 .eq-box {
+    display: table;        /* shrinks to content width */
     background: var(--paper-cream);
     border: 3px solid var(--ink-black);
-    padding: 1vw 1.5vw;
-    margin: 0.8vw 0;
+    padding: 0.5vw 1.2vw;
+    margin: 0.8vw auto;
     box-shadow: 6px 6px 0px var(--ink-black);
     text-align: center;
 }
@@ -275,7 +283,7 @@ ol[style*="counter-reset:refs"] li::before { content: "[" counter(refs) "]"; pos
 @media print {
     @page {
         size: A0 portrait;
-        margin: 1.5cm;
+        margin: 2cm;
     }
 
     * {
@@ -299,13 +307,13 @@ ol[style*="counter-reset:refs"] li::before { content: "[" counter(refs) "]"; pos
         gap: 0.7cm;
     }
 
-    .scaffold-cell,
-    .equation-slab-feature,
-    header, footer,
-    #poster-header, #poster-affiliation, #poster-footer {
-        transform: none !important;
-        box-shadow: none !important;
-    }
+    /* Let transforms through — they are what gives the poster its character.
+       Override box-shadows with cm-based values so they're visible on A0 paper. */
+    .scaffold-cell    { box-shadow: 0.35cm 0.35cm 0 var(--ink-black) !important; }
+    .equation-slab-feature { box-shadow: 0.28cm 0.28cm 0 var(--ink-black) !important; }
+    header, footer    { box-shadow: 0.2cm 0.2cm 0 var(--ink-black) !important; }
+    .eq-box           { box-shadow: 0.15cm 0.15cm 0 var(--ink-black) !important; }
+    .callout          { box-shadow: 0.15cm 0.15cm 0 var(--ink-black) !important; }
 
     .scaffold-cell,
     .equation-slab-feature,
@@ -314,17 +322,23 @@ ol[style*="counter-reset:refs"] li::before { content: "[" counter(refs) "]"; pos
         page-break-inside: avoid;
     }
 
-    .scaffold-cell { padding: 0.6cm; }
-    .equation-slab-feature { padding: 0.5cm 1cm; margin: 0.25cm 0; }
-    header { padding: 0.6cm; }
-    footer { padding: 0.5cm; }
+    .poster-canvas { gap: 1.6cm; padding: 1.6cm; }
+    .scaffold-cell { padding: 1.0cm; }
+    .equation-slab-feature { padding: 0.8cm 1.5cm; margin: 0.4cm 0; }
+    header { padding: 1.0cm; }
+    footer { padding: 0.9cm; }
 
-    .dynamic-stack { gap: 0.6cm; }
-    .two-col { gap: 0.5cm; }
+    .dynamic-stack { gap: 1.6cm; }
+    .two-col   { gap: 1.3cm; }
+    .three-col { gap: 1.3cm; }
 
-    h1 { font-size: 4rem; }
-    h2 { font-size: 2.1rem; margin-bottom: 0.4cm; }
-    p, li { font-size: 1.3rem; margin-bottom: 0.3cm; }
+    h1 { font-size: 5rem; }
+    h2 { font-size: 2.6rem; margin-bottom: 0.25cm; }
+    p, li { font-size: 2rem; margin-bottom: 0.2cm; }
+    ul { margin-bottom: 0.2cm; }
+
+    .key-list { columns: 2; column-gap: 0.5cm; }
+    .key-list li { break-inside: avoid; }
 
     /* Pull the node label back into flow so it doesn't overlap */
     .scaffold-cell::before {
@@ -332,6 +346,6 @@ ol[style*="counter-reset:refs"] li::before { content: "[" counter(refs) "]"; pos
         top: unset;
         left: unset;
         display: inline-block;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
 }
