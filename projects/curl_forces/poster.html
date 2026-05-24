@@ -26,7 +26,7 @@
 </head>
 <body class="tex2jax_process">
 
-<div class="poster-canvas">
+<div class="poster-canvas black-mesh">
 
     <!-- HEADER -->
     <header id="poster-header">
@@ -62,7 +62,7 @@
                 Can the NESS of a Hamiltonian curl-force system be described by
                 its Boltzmann distribution?
             </div>
-            <p style="margin-top:1vw; margin-bottom:0;">
+            <p class="panel-last">
                 <strong>Answer:</strong> No — but the Hamiltonian structure reveals a
                 clean mapping to a different class of nonequilibrium system.
             </p>
@@ -87,13 +87,13 @@
             <div class="eq-box">
                 $$\nabla\times\mathbf{F} = (\alpha-\gamma)\,\partial_{x_1}\partial_{x_2}U$$
             </div>
-            <p style="margin-bottom:0;">
+            <p class="panel-last">
                 Non-zero whenever $\alpha\neq\gamma$ and $U$ is not additively separable —
                 i.e. the system is genuinely <strong>non-conservative</strong>.
             </p>
 
             <!-- EQUATION SLAB: Klein-Kramers -->
-        <div class="equation-slab-feature slab-cyan" style="position:relative; margin-top:3vw;">
+        <div class="equation-slab-feature slab-cyan slab-raised">
             <span class="slab-label">KLEIN–KRAMERS EQ.</span>
             $$\frac{\partial f}{\partial t}
             = \frac{(\mathcal{A}\nabla_{\mathbf{x}} U)^T\!\cdot\nabla_{\dot{\mathbf{x}}}f}{m}
@@ -126,7 +126,7 @@
     </div>
 
     <!-- MAIN RESULT + DUALITY SLAB: side by side -->
-    <div class="two-col" style="align-items:stretch;">
+    <div class="two-col stretch">
 
         <!-- PANEL 4: Main result -->
         <div class="scaffold-cell cyan-mesh">
@@ -148,7 +148,7 @@
             <div class="eq-box">
                 $$T_i \equiv \mathcal{A}_{ii}^{-1}\,T$$
             </div>
-            <p style="margin-bottom:0;">
+            <p class="panel-last">
                 This establishes an exact duality between
                 <strong>Hamiltonian curl-force systems</strong> and
                 <strong>multi-temperature gyrators</strong>.
@@ -156,7 +156,7 @@
         </div>
 
         <!-- EQUATION SLAB: the mapping -->
-        <div class="equation-slab-feature slab-magenta" style="position:relative; margin:0;">
+        <div class="equation-slab-feature slab-magenta slab-flush">
             <span class="slab-label">THE DUALITY</span>
             $$\underbrace{\text{single bath } T,\ \mathcal{A}\neq\mathbf{1},\
               \mathbf{F}=-\mathcal{A}\nabla U}_{\text{Hamiltonian curl-force system}}
@@ -190,7 +190,7 @@
             </ul>
 
         <!-- EQUATION SLAB: EPR invariance -->
-        <div class="equation-slab-feature slab-amber" style="position:relative; margin-top:3vw;">
+        <div class="equation-slab-feature slab-amber slab-raised">
             <span class="slab-label">EPR INVARIANCE</span>
             $$\langle\dot{S}\rangle_{\text{curl-force}} \;=\; \langle\dot{S}\rangle_{\text{gyrator}}
             $$
@@ -211,14 +211,14 @@
                   = \frac{R_0 k\sqrt{T}(T_Y-T_X)\,xy}{(T_Xx^2+T_Yy^2)^{3/2}}$$
             </div>
             <img
+                class="poster-img"
                 src="velocity_field.svg"
-                alt="Force field and curl of the ring gyrator dual system (left) and Langevin simulation currents (right)"
-                style="width:100%; margin-top:2vw; display:block; background:#fff;">
-            <p style="font-size:clamp(0.95rem,1.1vw,1.2rem); font-style:italic; margin-top:0.6vw; margin-bottom:0; text-align:center;">
+                alt="Force field and curl of the ring gyrator dual system (left) and Langevin simulation currents (right)">
+            <p class="figure-caption">
                 (a) Force field $\mathbf{F}$ and curl $\nabla\times\mathbf{F}$ (color) for the dual curl-force system.
                 (b) Steady-state probability density and currents from 25,000 Langevin trajectories.
             </p>
-            <div class="equation-slab-feature slab-cyan" style="margin-top:2vw;">
+            <div class="equation-slab-feature slab-cyan slab-raised">
                 <span class="slab-label">SIGN OF CURL → DIRECTION OF GYRATION</span>
                 Four alternating circulation regions — matching Langevin simulations
                 and prior results for the ring gyrator [3], without solving the
@@ -230,28 +230,33 @@
     <!-- PANEL 7: Key takeaways — full width -->
     <div class="scaffold-cell solid-yellow">
         <h2>Summary &amp; Outlook</h2>
-        <ul class="key-list">
+        <ul class="sticky-list">
             <li>
-                Hamiltonian curl-force systems <strong>do not</strong> relax to the corresponding
+                <p>Hamiltonian curl-force systems <strong>do not</strong> relax to the corresponding
                 Boltzmann distribution when coupled to a heat bath.
+                </p>
             </li>
             <li>
-                A canonical transformation maps them exactly to multi-temperature systems.
+                <p>A canonical transformation maps them exactly to multi-temperature systems.
                 The curl $\nabla\times\mathbf{F}$ in the dual picture predicts the
                 <strong>direction and structure</strong> of rotational probability currents.
+                </p>
             </li>
             <li>
-                The EPR is the same in both representations; heat and work rates differ
+                <p>The EPR is the same in both representations; heat and work rates differ
                 — the two descriptions are physically distinguishable.
+                </p>
             </li>
             <li>
-                <strong>Experimental promise:</strong> curl-forces can be generated via
+                <p><strong>Experimental promise:</strong> curl-forces can be generated via
                 optical tweezers, offering a route to experimentally simulate
                 multi-temperature dynamics in standard laboratory settings.
+                </p>
             </li>
             <li>
-                <strong>Open questions:</strong> kinetic theory for curl force baths, overdamped regime, more general Hamiltonians,
+                <p><strong>Open questions:</strong> kinetic theory for curl force baths, overdamped regime, more general Hamiltonians,
                 connection to information engines, unified nonequilibrium theory.
+                </p>
             </li>
         </ul>
     </div>
@@ -259,18 +264,18 @@
     <!-- FOOTER -->
     <footer id="poster-footer">
         <h2>References</h2>
-        <ol style="padding-left:2.2em; margin:0; list-style:none; counter-reset:refs;">
-            <li style="margin-bottom:0.6vw;">
+        <ol class="refs-list">
+            <li>
                 M. V. Berry &amp; P. Shukla,
                 <em>Hamiltonian curl forces.</em>
                 Proc. R. Soc. A <strong>471</strong>, 20150002 (2015).
             </li>
-            <li style="margin-bottom:0.6vw;">
+            <li>
                 R. Filliger &amp; P. Reimann,
                 <em>Brownian gyrator: A minimal heat engine on the nanoscale.</em>
                 Phys. Rev. Lett. <strong>99</strong>, 230602 (2007).
             </li>
-            <li style="margin-bottom:0;">
+            <li>
                 I. Abdoli &amp; H. Löwen,
                 <em>Quadrupolar gyration of a Brownian particle in a confining ring.</em>
                 npj Soft Matter <strong>2</strong>, 5 (2026).
@@ -301,6 +306,16 @@
         document.getElementById("poster-header").style.transform = "rotate(-0.3deg)";
         document.getElementById("poster-affiliation").style.transform = "rotate(0.2deg)";
         document.getElementById("poster-footer").style.transform = "rotate(0.25deg)";
+
+        // Sticky notes: set column count dynamically and tilt each note
+        document.querySelectorAll('.sticky-list').forEach(list => {
+            const notes = list.querySelectorAll('li');
+            list.style.gridTemplateColumns = `repeat(${notes.length}, 1fr)`;
+            notes.forEach((li, i) => {
+                const tilt = (i % 2 === 0) ? 1.8 : -1.5;
+                li.style.transform = `rotate(${tilt}deg)`;
+            });
+        });
     });
 </script>
 

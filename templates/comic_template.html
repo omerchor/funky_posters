@@ -79,10 +79,16 @@
             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
         </div>
 
-        <!-- SAMPLE PANEL 4 -->
+        <!-- SAMPLE PANEL 4: sticky-notes summary -->
         <div class="scaffold-cell solid-yellow">
-            <h2>[04] Solid Grounded Target Block</h2>
-            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
+            <h2>[04] Summary &amp; Outlook</h2>
+            <ul class="sticky-list">
+                <li>First key conclusion or takeaway goes here.</li>
+                <li>Second result, finding, or open question.</li>
+                <li>Third point — keep each note short and punchy.</li>
+                <li>Fourth conclusion or future direction.</li>
+                <li>Fifth outlook item or experimental promise.</li>
+            </ul>
         </div>
 
     </div>
@@ -125,6 +131,16 @@
         document.getElementById("poster-header").style.transform = "rotate(-0.4deg)";
         document.getElementById("poster-affiliation").style.transform = "rotate(0.2deg)";
         document.getElementById("poster-footer").style.transform = "rotate(0.3deg)";
+
+        // Sticky notes: set column count dynamically and tilt each note
+        document.querySelectorAll('.sticky-list').forEach(list => {
+            const notes = list.querySelectorAll('li');
+            list.style.gridTemplateColumns = `repeat(${notes.length}, 1fr)`;
+            notes.forEach((li, i) => {
+                const tilt = (i % 2 === 0) ? 1.8 : -1.5;
+                li.style.transform = `rotate(${tilt}deg)`;
+            });
+        });
     });
 </script>
 

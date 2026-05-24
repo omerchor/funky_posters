@@ -10,7 +10,14 @@
     --thick-border: 6px solid var(--ink-black);
     --block-shadow-large: 20px 20px 0px var(--ink-black);
     --block-shadow-small: 8px 8px 0px var(--ink-black);
-    --halftone-grid: radial-gradient(var(--ink-black) 12%, transparent 12%);
+    --halftone-grid: radial-gradient(var(--ink-black) 11%, transparent 13%);
+
+    /* ─── TYPOGRAPHY SCALE ───────────────────────────────────────────────
+       Screen sizing uses vw units so it scales with the browser window.
+       For print, every font-size is calc(var(--print-base) * ratio).
+       Change --print-base here to resize ALL printed text at once.       */
+    --text-base: 2.3vw;
+    --print-base: 3.5rem;
 }
 
 * {
@@ -134,9 +141,10 @@ header h1 {
     font-weight: bold;
 }
 
-.scaffold-cell.pink-mesh  { background-image: radial-gradient(rgba(255,51,119,0.08) 15%, transparent 15%); background-size: 20px 20px; }
-.scaffold-cell.cyan-mesh  { background-image: radial-gradient(rgba(0,216,255,0.08) 15%, transparent 15%); background-size: 20px 20px; }
-.scaffold-cell.amber-mesh { background-image: radial-gradient(rgba(255,204,0,0.08) 15%, transparent 15%); background-size: 20px 20px; }
+.poster-canvas.black-mesh  { background-image: radial-gradient(rgb(0, 0, 0, 0.08) 15%, transparent 15%); background-size: 0.65cm 0.65cm; }
+.scaffold-cell.pink-mesh  { background-image: radial-gradient(rgba(255,51,119,0.08) 15%, transparent 15%); background-size: 0.65cm 0.65cm; }
+.scaffold-cell.cyan-mesh  { background-image: radial-gradient(rgba(0,216,255,0.08) 15%, transparent 15%); background-size: 0.65cm 0.65cm; }
+.scaffold-cell.amber-mesh { background-image: radial-gradient(rgba(255,204,0,0.08) 15%, transparent 15%); background-size: 0.65cm 0.65cm; }
 .scaffold-cell.solid-yellow { background-color: var(--pop-yellow); }
 
 h2 {
@@ -151,7 +159,7 @@ h2 {
 }
 
 p, li {
-    font-size: clamp(1.35rem, 1.55vw, 1.8rem);
+    font-size: clamp(1.5rem, 1.7vw, 2rem);
     font-weight: normal;
     color: var(--ink-black);
     line-height: 1.6;
@@ -176,9 +184,9 @@ p, li {
     font-size: clamp(1.4rem, 1.65vw, 2rem);
 }
 
-.equation-slab-feature.slab-cyan    { background-color: rgba(0,216,255,0.12); background-image: radial-gradient(rgba(0,216,255,0.25) 15%, transparent 15%); background-size: 20px 20px; border-color: var(--pop-cyan); }
-.equation-slab-feature.slab-magenta { background-color: rgba(255,51,119,0.12); background-image: radial-gradient(rgba(255,51,119,0.25) 15%, transparent 15%); background-size: 20px 20px; border-color: var(--pop-pink); }
-.equation-slab-feature.slab-amber   { background-color: rgba(255,204,0,0.12);  background-image: radial-gradient(rgba(255,204,0,0.35) 15%, transparent 15%); background-size: 20px 20px; border-color: var(--pop-yellow); }
+.equation-slab-feature.slab-cyan    { background-color: rgba(0,216,255,0.12); background-image: radial-gradient(rgba(0,216,255,0.25) 15%, transparent 15%); background-size: 0.65cm 0.65cm; border-color: var(--pop-cyan); }
+.equation-slab-feature.slab-magenta { background-color: rgba(255,51,119,0.12); background-image: radial-gradient(rgba(255,51,119,0.25) 15%, transparent 15%); background-size: 0.65cm 0.65cm; border-color: var(--pop-pink); }
+.equation-slab-feature.slab-amber   { background-color: rgba(255,204,0,0.12);  background-image: radial-gradient(rgba(255,204,0,0.35) 15%, transparent 15%); background-size: 0.65cm 0.65cm; border-color: var(--pop-yellow); }
 
 /* Nested slabs: opaque base so the parent cell's dot pattern doesn't bleed through */
 .scaffold-cell .equation-slab-feature.slab-cyan    { background-color: #d6f7ff; }
@@ -243,7 +251,7 @@ footer {
     background: var(--pop-pink);
     color: #fff;
     font-family: monospace;
-    font-size: 0.78rem;
+    font-size: 2rem;
     font-weight: bold;
     padding: 2px 10px;
     letter-spacing: 1px;
@@ -276,9 +284,83 @@ footer {
 
 .key-list li::before { content: "▶ "; font-weight: bold; }
 
+/* --- STICKY NOTES LIST --- */
+.sticky-list {
+    display: grid;
+    /* grid-template-columns set dynamically by JS based on item count */
+    gap: 2.5vw;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sticky-list li {
+    border: var(--thick-border);
+    padding: 2vw 1.4vw;
+    margin-top: 0.5vw;
+    box-shadow: var(--block-shadow-small);
+    text-align: left;
+    text-indent: 1em;
+    line-height: 1.5;
+    text-indent: 0;
+    /* rotation applied by JS */
+}
+
+.sticky-list li::before { content: none; }
+
+/* colour cycle across notes */
+.sticky-list li { background: var(--paper-cream); }
+
 /* --- REFERENCES LIST --- */
-ol[style*="counter-reset:refs"] li { counter-increment: refs; position: relative; padding-left: 0.2em; }
-ol[style*="counter-reset:refs"] li::before { content: "[" counter(refs) "]"; position: absolute; left: -2.2em; font-family: monospace; font-weight: bold; }
+.refs-list {
+    padding-left: 2.2em;
+    margin: 0;
+    list-style: none;
+    counter-reset: refs;
+}
+
+.refs-list li {
+    counter-increment: refs;
+    position: relative;
+    padding-left: 0.2em;
+    margin-bottom: 0.6vw;
+}
+
+.refs-list li:last-child { margin-bottom: 0; }
+
+.refs-list li::before {
+    content: "[" counter(refs) "]";
+    position: absolute;
+    left: -2.2em;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+/* --- POSTER FIGURE --- */
+.poster-img {
+    width: 100%;
+    margin-top: 2vw;
+    display: block;
+    background: #fff;
+}
+
+.figure-caption {
+    font-size: clamp(0.95rem, 1.1vw, 1.2rem);
+    font-style: italic;
+    margin-top: 0.6vw;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+/* --- LAYOUT MODIFIERS --- */
+.two-col.stretch { align-items: stretch; }
+
+/* --- SLAB MARGIN VARIANTS --- */
+.equation-slab-feature.slab-flush  { margin: 0; }
+.equation-slab-feature.slab-raised { margin-top: 3vw; }
+
+/* --- LAST ELEMENT IN A PANEL --- */
+.panel-last { margin-bottom: 0; }
 
 @media print {
     @page {
@@ -293,18 +375,25 @@ ol[style*="counter-reset:refs"] li::before { content: "[" counter(refs) "]"; pos
 
     body {
         padding: 0;
-        background: #fff !important;
-        background-image: none !important;
+        /* background: #fff !important; */
+        /* background-image: none !important; */
         min-height: unset;
         display: block;
     }
 
+    /* Canvas fills the whole page in print — body background is invisible behind it.
+       SVG data-URI backgrounds are preserved as vectors in Chrome's PDF output so
+       they stay perfectly sharp at any print resolution, unlike CSS gradients which
+       get rasterised at screen DPI.
+       min-height forces the canvas to fill the page when content is short. */
     .poster-canvas {
         border: 6px solid #000;
         box-shadow: none;
         padding: 1cm;
         max-width: 100%;
         gap: 0.7cm;
+        min-height: 100vh;
+        background-color: var(--paper-cream);
     }
 
     /* Let transforms through — they are what gives the poster its character.
@@ -332,20 +421,52 @@ ol[style*="counter-reset:refs"] li::before { content: "[" counter(refs) "]"; pos
     .two-col   { gap: 1.3cm; }
     .three-col { gap: 1.3cm; }
 
-    h1 { font-size: 5rem; }
-    h2 { font-size: 2.6rem; margin-bottom: 0.25cm; }
-    p, li { font-size: 2rem; margin-bottom: 0.2cm; }
+    /* ─── ALL FONT SIZES DERIVED FROM --print-base ───────────────────────
+       Tweak --print-base in :root to scale the entire poster at once.     */
+    h1 { font-size: calc(var(--print-base) * 2.25); }
+    h2 { font-size: calc(var(--print-base) * 1.15); margin-bottom: 0.25cm; }
+    p, li { font-size: var(--print-base); margin-bottom: 0.2cm; }
     ul { margin-bottom: 0.2cm; }
 
-    .key-list { columns: 2; column-gap: 0.5cm; }
-    .key-list li { break-inside: avoid; }
+    .meta-mesh          { font-size: calc(var(--print-base) * 0.75); }
+    .affiliation-panel  { font-size: calc(var(--print-base) * 0.6); }
+    footer              { font-size: calc(var(--print-base) * 0.6); }
+    .slab-label         { font-size: calc(var(--print-base) * 0.9); }
+    .callout            { font-size: calc(var(--print-base) * 0.9); }
+
+    .equation-slab-feature          { font-size: var(--print-base); }
+    .equation-slab-feature .MathJax { font-size: calc(var(--print-base) * 1.15) !important; }
+    .eq-box .MathJax                { font-size: calc(var(--print-base) * 1.05) !important; }
 
     /* Pull the node label back into flow so it doesn't overlap */
     .scaffold-cell::before {
+        font-size: calc(var(--print-base) * 0.42);
         position: relative;
         top: unset;
         left: unset;
         display: inline-block;
         margin-bottom: 4px;
+    }
+
+    /* ─── MESH DOT PATTERNS — SVG data-URI overrides for print ─────────
+       CSS radial-gradient is rasterised at screen DPI → blurry at A0 scale.
+       SVG backgrounds are kept as vectors in Chrome PDF → sharp at all sizes. */
+    .poster-canvas.black-mesh  { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Ccircle cx='5' cy='5' r='2.5' fill='%23000000' fill-opacity='.08'/%3E%3C/svg%3E"); background-size: 1.3cm 1.3cm; }
+    .scaffold-cell.pink-mesh  { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Ccircle cx='5' cy='5' r='2.5' fill='%23ff3377' fill-opacity='.22'/%3E%3C/svg%3E"); background-size: 1.3cm 1.3cm; }
+    .scaffold-cell.cyan-mesh  { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Ccircle cx='5' cy='5' r='2.5' fill='%2300d8ff' fill-opacity='.22'/%3E%3C/svg%3E"); background-size: 1.3cm 1.3cm; }
+    .scaffold-cell.amber-mesh { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Ccircle cx='5' cy='5' r='2.5' fill='%23ffcc00' fill-opacity='.28'/%3E%3C/svg%3E"); background-size: 1.3cm 1.3cm; }
+
+    .equation-slab-feature.slab-cyan    { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Ccircle cx='5' cy='5' r='2.5' fill='%2300d8ff' fill-opacity='.38'/%3E%3C/svg%3E"); background-size: 1.1cm 1.1cm; }
+    .equation-slab-feature.slab-magenta { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Ccircle cx='5' cy='5' r='2.5' fill='%23ff3377' fill-opacity='.38'/%3E%3C/svg%3E"); background-size: 1.1cm 1.1cm; }
+    .equation-slab-feature.slab-amber   { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Ccircle cx='5' cy='5' r='2.5' fill='%23ffcc00' fill-opacity='.48'/%3E%3C/svg%3E"); background-size: 1.1cm 1.1cm; }
+
+    .key-list { columns: 2; column-gap: 0.5cm; }
+    .key-list li { break-inside: avoid; }
+
+    .sticky-list { gap: 0.8cm; }
+    .sticky-list li {
+        padding: 0.6cm 0.5cm;
+        box-shadow: 0.15cm 0.15cm 0 var(--ink-black) !important;
+        /* break-inside: avoid; */
     }
 }
